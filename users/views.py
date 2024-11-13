@@ -34,6 +34,7 @@ def login(request):
                 "done": True,
                 "msg": "Account not found"
             }
+
     # TODO: To create a login catch
     return render(request, "login.html", context)
 

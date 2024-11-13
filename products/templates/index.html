@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Products Lists</title>
+    <link href="{% static '/css/products.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="base">
+      <header>
+        <img src="{% static 'assets/logo.png' %}" alt="Logo" />
+        <nav>
+          <ul>
+            <li>Home</li>
+            <li>Help</li>
+            <li><a href="user/login/">Login</a></li>
+            <li><a href="user/reg/">Sign Up</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <div class="search-section">
+          <span>
+            <span>
+              <input
+                type="search"
+                name="search"
+                placeholder="Search product... "
+              />
+              <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </span>
+            <i class="cart fa-solid fa-cart-shopping"></i>
+          </span>
+        </div>
+        <div class="carousel">
+          <i class="fa-solid fa-less-than"></i>
+          <div class="content">
+            <span>Mga cute pics ko</span>
+            <span>Mga cute pics nya</span>
+          </div>
+          <i class="fa-solid fa-greater-than"></i>
+        </div>
+        <div class="categories">
+          {% if categories %} {% for category in categories %}
+          <span class="category">{{category}}</span>
+          {% endfor %} {% endif %}
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

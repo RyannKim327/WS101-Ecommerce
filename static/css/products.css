@@ -1,0 +1,146 @@
+@import url("base.css");
+
+body {
+  > .base {
+    width: 100%;
+    height: 100%;
+    > header {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0.75rem;
+      background-color: rgba(100, 100, 100, 255);
+      color: white;
+
+      > img {
+        aspect-ratio: 1/1;
+      }
+
+      > nav {
+        > ul {
+          display: flex;
+          flex-direction: row;
+          list-style: none;
+
+          > li {
+            padding: 0 0.5rem;
+
+            > a {
+              text-decoration: none;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+    > main {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 0 1rem;
+
+      > div:not(.search-section) {
+        margin: 1rem 0;
+      }
+
+      > .search-section {
+        display: flex;
+        justify-content: center;
+        padding: 2rem 0;
+
+        > span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          > span {
+            border: 1px black solid;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+
+            ~ .cart,
+            > input,
+            > button {
+              font-size: 1.5rem;
+              background-color: transparent;
+            }
+          }
+          > .cart {
+            padding: 0.5rem;
+            margin-left: 1rem;
+          }
+        }
+      }
+
+      > .carousel {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        aspect-ratio: 16/3;
+        box-sizing: border-box;
+        width: 100%;
+
+        > i {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          padding: 0 1rem;
+          font-size: 1.5rem;
+          box-sizing: border-box;
+          transition:
+            background-color 0.15s ease,
+            color 0.15s ease;
+          margin: 1rem 0.5rem;
+          border-radius: 0.25rem;
+
+          &:hover {
+            background-color: rgba(33, 33, 33, 90);
+            color: white;
+          }
+        }
+
+        > .content {
+          background-color: gray;
+          color: white;
+          flex-grow: 1;
+          overflow: hidden;
+          border-radius: 0.25rem;
+          height: 100%;
+
+          > span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      > .categories {
+        display: flex;
+        flex-wrap: no-wrap;
+        align-items: center;
+        background-color: gray;
+        aspect-ratio: 16/2;
+        width: 100%;
+        padding: 0 0.5rem;
+
+        > .category {
+          background-color: rgb(200, 200, 200);
+          color: white;
+          height: 75%;
+          aspect-ratio: 1/1;
+          border: 1px black solid;
+
+          &:nth-child(even) {
+            margin: 0 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
