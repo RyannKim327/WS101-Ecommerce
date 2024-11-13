@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="{% static 'css/forms.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="base">
+      <form method="POST">
+        {% csrf_token %}
+        <h1>Sign up</h1>
+        <span class="input">
+          <label for="username">Username: <span>*</span></label>
+          <input type="text" name="username" id="username" required />
+        </span>
+        <span class="input">
+          <label for="email">Email: <span>*</span></label>
+          <input type="email" name="email" id="email" required />
+        </span>
+
+        <span class="input">
+          <label for="password">Passsword: <span>*</span></label>
+          <input type="password" name="password" id="password" required />
+        </span>
+
+        <span class="input">
+          <label for="rpw">Retype Password: <span>*</span></label>
+          <input type="password" name="rpw" id="rpw" required />
+        </span>
+        <input
+          style="display: none"
+          id="signup"
+          type="submit"
+          value="Sign up"
+        />
+      </form>
+    </div>
+  </body>
+  <script>
+    const pw = document.getElementById("password");
+    const rpw = document.getElementById("rpw");
+    const sign = document.getElementById("signup");
+
+    pw.onkeyup = (event) => eventListener();
+    rpw.onkeyup = (event) => eventListener();
+
+    function eventListener() {
+      if (pw.value.length >= 8 && pw.value === rpw.value) {
+        sign.style.display = "inline";
+      } else {
+        sign.style.display = "none";
+      }
+    }
+  </script>
+</html>

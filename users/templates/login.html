@@ -14,11 +14,17 @@
   </head>
   <body>
     <div class="base">
-      <form>
+      <form method="POST" action="login/">
+        {% csrf_token %}
         <span class="input">
           <label for="username">Username/Email: <span>*</span></label>
           <input type="text" name="username" id="username" required />
         </span>
+        <span class="input">
+          <label for="password">Password: <span>*<span></label>
+          <input type="password" name="password" id="password" min_length="8">        
+        </span>
+        <input type="submit" value="Login">
       </form>
     </div>
   </body>

@@ -10,8 +10,53 @@ body {
     align-items: center;
 
     > form {
-      > input {
+      display: flex;
+      flex-direction: column;
+
+      box-shadow: 1px 1px 5px rgba(33, 33, 33, 100);
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      width: 50%;
+      align-items: flex-end;
+
+      > h1 {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+      }
+
+      > .input {
+        display: flex;
+
         border: 1px black solid;
+        padding: 0.125rem 0.5rem;
+        border-radius: 0.25rem;
+        width: 100%;
+        justify-content: space-between;
+
+        &:nth-child(even) {
+          margin: 0.5rem 0;
+        }
+
+        > label {
+          width: 25%;
+
+          > span {
+            color: red;
+            font-weight: bolder;
+          }
+        }
+        > input {
+          width: 75%;
+        }
+      }
+
+      > input[type="submit"] {
+        border: 1px black solid;
+        padding: 0.125rem 0.75rem;
+        border-radius: 0.25rem;
+        margin: 0.5rem 0;
+        background-color: transparent;
       }
     }
   }
