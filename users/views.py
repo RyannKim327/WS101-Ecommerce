@@ -15,13 +15,27 @@ def encrypt(pw):
 
 def login(request):
     # TODO: To create a basic login session
+    context = {
+        "done": False
+    }
     if request.method == "POST":
-        users = User.objects.get(username=request.POST.get("username"))
-        if encrypt(users.password) == encrypt(request.POST.get("password")):
-           return HttpResponse("<h1>Done</h1>")
-    
+        users = User.objects.filter(username=request.POST.get("username"))
+        if users:
+            users = User.objects.get(username=request.POST.get('username'))
+            if users.password == encrypt(request.POST.get("password")):
+                return HttpResponse("<h1>Done</h1>")
+            else:
+                context = {
+                    "done": True,
+                    "msg": "Invalid passwords"
+                }
+        else:
+            context = {
+                "done": True,
+                "msg": "Account not found"
+            }
     # TODO: To create a login catch
-    return render(request, "login.html")
+    return render(request, "login.html", context)
 
 def register(request):
     if request.method == "POST":

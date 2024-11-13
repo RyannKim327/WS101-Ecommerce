@@ -14,8 +14,13 @@
   </head>
   <body>
     <div class="base">
-      <form method="POST" action="login/">
+      <form method="POST">
         {% csrf_token %}
+        {% if done %}
+        <h1 style="color: red;">{{ msg }}</h1>
+        {% else %}
+          <h1>Login Page</h1>
+        {% endif %}
         <span class="input">
           <label for="username">Username/Email: <span>*</span></label>
           <input type="text" name="username" id="username" required />
