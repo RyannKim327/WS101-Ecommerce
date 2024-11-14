@@ -44,9 +44,15 @@
           <i class="fa-solid fa-greater-than"></i>
         </div>
         <div class="categories">
-          {% if categories %} {% for category in categories %}
-          <span class="category">{{category}}</span>
-          {% endfor %} {% endif %}
+          <p>Categories</p>
+          <div class="base-category">
+            {% if categories %} {% for category in categories %}
+              <span class="category">{{category}}</span>
+            {% endfor %} {% endif %}
+          </div>
+        </div>
+        <div class="product">
+
         </div>
       </main>
     </div>

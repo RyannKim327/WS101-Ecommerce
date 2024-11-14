@@ -1,9 +1,16 @@
 @import url("base.css");
 
+:root {
+  --main-background: #d0b9a7;
+  --main-color: #714329;
+}
+
 body {
   > .base {
+    background-color: var(--main-background); 
     width: 100%;
     height: 100%;
+    
     > header {
       display: flex;
       flex-direction: row;
@@ -117,31 +124,47 @@ body {
             align-items: center;
             width: 100%;
             height: 100%;
+            animation: fade-in 1s;
+            font-size: 3rem;
+            /* transition: opacity .5s ease; */
           }
         }
       }
 
       > .categories {
-        display: flex;
-        flex-wrap: no-wrap;
-        align-items: center;
         background-color: gray;
-        aspect-ratio: 16/2;
-        width: 100%;
-        padding: 0 0.5rem;
+        color: white;
 
-        > .category {
-          background-color: rgb(200, 200, 200);
-          color: white;
-          height: 75%;
-          aspect-ratio: 1/1;
-          border: 1px black solid;
+        > .base-category {
+          display: flex;
+          flex-wrap: no-wrap;
+          align-items: center;
+          justify-content: space-evenly;
+          aspect-ratio: 32/3;
+          width: 100%;
+          padding: 0 0.5rem;
 
-          &:nth-child(even) {
-            margin: 0 0.5rem;
+          > .category {
+            background-color: rgb(200, 200, 200);
+            color: white;
+            height: 75%;
+            aspect-ratio: 1/1;
+            border: 1px black solid;
+
+            &:nth-child(even) {
+              margin: 0 0.5rem;
+            }
           }
         }
       }
     }
+  }
+}
+
+@keyframes fade-in {
+  from{
+    opacity: 0;
+  }to{
+    opacity: 1;
   }
 }

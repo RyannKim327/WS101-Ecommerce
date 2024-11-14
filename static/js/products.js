@@ -12,13 +12,14 @@ const functionCarousel = () => {
     "AI na pagod"
   ]
   
-  const container = document.createElement("span")
-  
   setInterval(() => {
+    carousel.innerHTML = ""
+    const container = document.createElement("span")
     const random = Math.floor(Math.random() * lists.length)
     container.textContent = lists[random]
+    carousel.appendChild(container)
   }, 2500)
-  carousel.appendChild(container)
+
 }
 
 window.onload = () => {

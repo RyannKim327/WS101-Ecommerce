@@ -1,5 +1,10 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css");
 
+:root {
+  --main-background: #D0B9A76;
+  --main-color: #714320;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +15,8 @@
 }
 
 body {
+  background-color: var(--main-background);
+  color: var(--main-color);
   width: 100dvw;
   height: 100dvh;
   overflow: hidden;
