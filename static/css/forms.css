@@ -16,7 +16,8 @@ body {
       box-shadow: 1px 1px 5px rgba(33, 33, 33, 100);
       padding: 0.5rem;
       border-radius: 0.25rem;
-      width: 50%;
+      width: 25%;
+      aspect-ratio: 1/1;
       align-items: flex-end;
 
       > h1 {
@@ -39,7 +40,7 @@ body {
         }
 
         > label {
-          width: 25%;
+          width: 35%;
 
           > span {
             color: red;

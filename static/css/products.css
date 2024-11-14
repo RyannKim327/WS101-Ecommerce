@@ -120,6 +120,7 @@ body {
           }
         }
       }
+
       > .categories {
         display: flex;
         flex-wrap: no-wrap;

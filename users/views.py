@@ -19,9 +19,9 @@ def login(request):
         "done": False
     }
     if request.method == "POST":
-        users = User.objects.filter(username=request.POST.get("username"))
+        users = User.objects.filter(Q(username=request.POST.get("username")) | Q(email=request.POST.get("username")))
         if users:
-            users = User.objects.get(username=request.POST.get('username'))
+            users = User.objects.get(Q(username=request.POST.get('username')) | Q(email=request.POST.get("username")))
             if users.password == encrypt(request.POST.get("password")):
                 return HttpResponse("<h1>Done</h1>")
             else:
