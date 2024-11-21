@@ -7,10 +7,10 @@
 
 body {
   > .base {
-    background-color: var(--main-background); 
+    background-color: var(--main-background);
     width: 100%;
     height: 100%;
-    
+
     > header {
       display: flex;
       flex-direction: row;
@@ -22,7 +22,9 @@ body {
       color: white;
 
       > img {
-        aspect-ratio: 1/1;
+        width: 90px;
+        height: 76px;
+        /* aspect-ratio: 1/1; */
       }
 
       > nav {
@@ -46,7 +48,8 @@ body {
     > main {
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      /* overflow: hidden; */
+      /* overflow-y: scroll; */
       padding: 0 1rem;
 
       > div:not(.search-section) {
@@ -83,21 +86,28 @@ body {
       }
 
       > .carousel {
+        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        aspect-ratio: 16/3;
+        aspect-ratio: 16/4;
         box-sizing: border-box;
         width: 100%;
+        background-color: gray;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        transition: background-image 2s ease-in;
+        /* animation: fade-in 2.75s infinite; */
 
         > i {
           display: flex;
           align-items: center;
-          height: 100%;
-          padding: 0 1rem;
+          /* height: 100%; */
+          padding: 1rem;
           font-size: 1.5rem;
           box-sizing: border-box;
+          color: transparent;
           transition:
             background-color 0.15s ease,
             color 0.15s ease;
@@ -105,28 +115,30 @@ body {
           border-radius: 0.25rem;
 
           &:hover {
-            background-color: rgba(33, 33, 33, 90);
+            background-color: rgba(33, 33, 33, 10);
             color: white;
           }
         }
 
         > .content {
-          background-color: gray;
+          /* position: absolute; */
+          /* background-color: gray; */
           color: white;
           flex-grow: 1;
           overflow: hidden;
           border-radius: 0.25rem;
           height: 100%;
 
-          > span {
+          > img {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
             height: 100%;
             animation: fade-in 1s;
+            /* aspect-ratio: 16/9; */
             font-size: 3rem;
-            /* transition: opacity .5s ease; */
+            transition: opacity 0.5s ease;
           }
         }
       }
@@ -162,9 +174,10 @@ body {
 }
 
 @keyframes fade-in {
-  from{
+  from {
     opacity: 0;
-  }to{
+  }
+  to {
     opacity: 1;
   }
 }

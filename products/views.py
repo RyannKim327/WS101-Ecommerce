@@ -5,12 +5,12 @@ from django.shortcuts import render
 def index(request):
     ctx = {
       "categories": [
-        "House",
-        "Land",
-        "Sardines",
-        "River",
-        "Waterfall",
-        ""
+        "Mobiles",
+        "Clothes",
+        "Cameras",
+        "Shoes",
+        "Keyboard",
+        "Perfume"
       ]
     }
     return render(request, "index.html", ctx)

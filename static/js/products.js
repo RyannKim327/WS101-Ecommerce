@@ -1,27 +1,25 @@
-"use strict"
+"use strict";
 
 const functionCarousel = () => {
-  const carousel = document.getElementById("carousel")
-  const lists = [
-    "Cute pics mo",
-    "Cute pics ko",
-    "Long Short Message",
-    "NGL na walang laman",
-    "Spambot sa messenger",
-    "Meta AI na binebe time",
-    "AI na pagod"
-  ]
-  
+  const carousel = document.getElementById("carousel");
+  let random = 0;
+  const img = document.createElement("img");
+  // const random = Math.floor(Math.random() * imgs.length);
+  // carousel.style.backgroundImage = `url('${imgs[random]}')`;
+  img.src = imgs[random % imgs.length];
+  carousel.appendChild(img);
   setInterval(() => {
-    carousel.innerHTML = ""
-    const container = document.createElement("span")
-    const random = Math.floor(Math.random() * lists.length)
-    container.textContent = lists[random]
-    carousel.appendChild(container)
-  }, 2500)
+    carousel.innerHTML = "";
+    random++;
+    const img = document.createElement("img");
+    // const random = Math.floor(Math.random() * imgs.length);
+    // carousel.style.backgroundImage = `url('${imgs[random]}')`;
+    img.src = imgs[random % imgs.length];
 
-}
+    carousel.appendChild(img);
+  }, 2500);
+};
 
 window.onload = () => {
-  functionCarousel()
-}
+  functionCarousel();
+};
