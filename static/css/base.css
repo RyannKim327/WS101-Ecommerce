@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 :root {
-  --main-background: #D0B9A76;
-  --main-color: #714320;
+  --main-background: #78b3ce;
+  --category-background: #c3e6f0;
 }
 
 * {
