@@ -1,8 +1,11 @@
 @import url("base.css");
 
 :root {
-  --main-background: #d0b9a7;
-  --main-color: #714329;
+  --header-background: #ffffff;
+  --main-background: #78b3ce;
+  --category-background: #c3e6f0;
+  --main-color: #ffffff;
+  --search-background: #ffffff;
 }
 
 body {
@@ -18,8 +21,8 @@ body {
       justify-content: space-between;
       align-items: center;
       padding: 0.5rem 0.75rem;
-      background-color: rgba(100, 100, 100, 255);
-      color: white;
+      background-color: var(--header-background);
+      color: black;
 
       > img {
         width: 90px;
@@ -35,10 +38,11 @@ body {
 
           > li {
             padding: 0 0.5rem;
+            font-size: 1.5rem;
 
             > a {
               text-decoration: none;
-              color: white;
+              color: black;
             }
           }
         }
@@ -65,11 +69,23 @@ body {
           display: flex;
           justify-content: center;
           align-items: center;
+          width: 75%;
 
           > span {
+            background-color: var(--search-background);
+            display: flex;
             border: 1px black solid;
             border-radius: 0.5rem;
             padding: 0.5rem 1rem;
+            width: 100%;
+
+            > input {
+              flex-grow: 1;
+            }
+
+            > button {
+              padding-left: 0.5rem;
+            }
 
             ~ .cart,
             > input,
@@ -94,7 +110,7 @@ body {
         aspect-ratio: 16/4;
         box-sizing: border-box;
         width: 100%;
-        background-color: gray;
+        background-color: transparent;
         background-repeat: no-repeat;
         background-size: 100% 100%;
         transition: background-image 2s ease-in;
@@ -142,29 +158,54 @@ body {
           }
         }
       }
-
       > .categories {
-        background-color: gray;
-        color: white;
+        padding: 0 4rem;
 
-        > .base-category {
-          display: flex;
-          flex-wrap: no-wrap;
-          align-items: center;
-          justify-content: space-evenly;
-          aspect-ratio: 32/3;
-          width: 100%;
-          padding: 0 0.5rem;
+        > div {
+          background-color: var(--category-background);
+          color: white;
 
-          > .category {
-            background-color: rgb(200, 200, 200);
+          > p {
+            margin-left: 25px;
+            font-size: 1.5rem;
+            color: black;
+          }
+
+          > .base-category {
+            background-color: var(--category-background);
             color: white;
-            height: 75%;
-            aspect-ratio: 1/1;
-            border: 1px black solid;
+            display: flex;
+            flex-wrap: no-wrap;
+            align-items: center;
+            justify-content: space-around;
+            /* aspect-ratio: 32/3; */
+            width: 100%;
+            overflow-x: scroll;
 
-            &:nth-child(even) {
-              margin: 0 0.5rem;
+            > .category {
+              display: flex;
+              flex-direction: column;
+              background-color: white;
+              color: black;
+              align-items: center;
+              height: 75%;
+              padding: 1rem 0.75rem;
+              aspect-ratio: 3/4;
+              border: 1px black solid;
+
+              /* &:nth-child(even) { */
+              /*   margin: 0 0.5rem; */
+              /* } */
+
+              > span {
+                background-color: var(--category-background);
+                border-radius: 50px;
+                padding: 0.5rem 0.75rem;
+
+                > img {
+                  aspect-ratio: 1/1;
+                }
+              }
             }
           }
         }

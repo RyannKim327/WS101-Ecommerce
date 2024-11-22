@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import *
 
 # Create your views here.
 def index(request):
@@ -14,3 +14,10 @@ def index(request):
       ]
     }
     return render(request, "index.html", ctx)
+
+def addtocart(request, id):
+  # product = Product.objects.get(productID=id)
+  ctx = {
+    # "product": product
+  }
+  return render(request, "addtocart.html", ctx)

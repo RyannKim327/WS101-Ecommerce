@@ -55,11 +55,18 @@
           <i class="fa-solid fa-greater-than"></i>
         </div>
         <div class="categories">
-          <p>Categories</p>
-          <div class="base-category">
-            {% if categories %} {% for category in categories %}
-              <span class="category">{{category}}</span>
-            {% endfor %} {% endif %}
+          <div>
+            <p>Categories</p>
+            <div class="base-category">
+              {% if categories %} {% for category in categories %}
+              <span class="category">
+                <span>
+                  <img src="{% static 'assets/'|add:category|lower|add:'.png' %}">
+                </span>
+                {{category}}
+              </span>
+              {% endfor %} {% endif %}
+            </div>
           </div>
         </div>
         <div class="product">
