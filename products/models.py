@@ -7,6 +7,7 @@ class Product(models.Model):
     productDescription = models.CharField(max_length=500, null=False)
     manufacturer = models.CharField(max_length=100, null=False)
     # expiryDate = models.DateField()
+    img = models.TextField()
     category = models.CharField(max_length=100, null=False)
 
     def __str__(self):

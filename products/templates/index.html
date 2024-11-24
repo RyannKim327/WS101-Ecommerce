@@ -70,7 +70,21 @@
           </div>
         </div>
         <div class="product">
-
+          <div>
+            <p>Top Products</p>
+            <div class="container">
+              {% if products1 %}
+                {% for product in products %}
+                  <span>
+                    <!-- INFO: Image was stored in base64 format -->
+                    <img src="{{ product.img }}">
+                  </span>
+                {% endfor %}
+              {% else %}
+                <p>No Products yet</p>
+              {% endif %}
+            </div>
+          </div>
         </div>
       </main>
     </div>

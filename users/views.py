@@ -7,7 +7,7 @@ from .middlewares import password
 # Create your views here.
 
 def index(request):
-    return render(request, "login.html")
+    return HttpResponse("<script>location.href='login/'</script>")
 
 def encrypt(pw): 
     a = password(pw)
