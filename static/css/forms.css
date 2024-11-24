@@ -1,6 +1,13 @@
 @import url("base.css");
 
+:root {
+  --main-background: #78b3ce;
+  --main-frame: #c9cef0;
+}
+
 body {
+  background-color: var(--main-background);
+  
   > .base {
     display: flex;
     flex-direction: column;
@@ -8,56 +15,86 @@ body {
     height: 100%;
     justify-content: center;
     align-items: center;
+    background-color: var(--main-background);
 
     > form {
       display: flex;
       flex-direction: column;
-
-      box-shadow: 1px 1px 5px rgba(33, 33, 33, 100);
-      padding: 0.5rem;
-      border-radius: 0.25rem;
-      width: 25%;
-      aspect-ratio: 1/1;
-      align-items: flex-end;
-
-      > h1 {
-        width: 100%;
-        text-align: center;
-        padding: 0.5rem 0;
+      background-color: var(--main-frame);
+      padding: 1rem;
+      border-radius: .75rem;
+      
+      > .title {
+        text-align: left;
+        padding-left: .5rem;
+        padding-bottom: 1rem;
       }
 
-      > .input {
+      > div {
         display: flex;
 
-        border: 1px black solid;
-        padding: 0.125rem 0.5rem;
-        border-radius: 0.25rem;
-        width: 100%;
-        justify-content: space-between;
+        > div {
+          display: flex;
+          flex-direction: column;
+          padding: .5rem;
+          justify-content: space-evenly;
+          
+          > .input {
+            display: flex;
+            padding: 0.25rem 0.5rem;
+            border-radius: .5rem;
+            width: 100%;
+            justify-content: space-between;
+            background-color: white;
 
-        &:nth-child(even) {
-          margin: 0.5rem 0;
-        }
-
-        > label {
-          width: 35%;
-
-          > span {
-            color: red;
-            font-weight: bolder;
+            > input {
+              padding: .25rem;
+              background-color: transparent;
+              font-size: 1rem;
+            }
           }
         }
-        > input {
-          width: 75%;
+        > .login {
+          justify-content: flex-start;
+          > .input {
+            margin: .25rem 0;
+          }
         }
-      }
+        > .media-sites {
+          > div {
+            
+            > .sign-button {
+              width: 100%;
+              background-color: white;
+              color: black;
+              padding: .75rem .25rem;
+              border-radius: .5rem;
+              font-size: 1rem;
+            }
+          }
 
-      > input[type="submit"] {
-        border: 1px black solid;
-        padding: 0.125rem 0.75rem;
-        border-radius: 0.25rem;
-        margin: 0.5rem 0;
-        background-color: transparent;
+          > .button-platform {
+            border: 1px black solid;
+            background-color: transparent;
+            padding: .75rem;
+            border-radius: .5rem;
+            margin: .25rem 0;
+          }
+          
+          > .or-separator {
+            border-top: 2px black solid;
+            text-align: center;
+            margin: 1.5rem 0 ;
+
+            > span{
+              background-color: var(--main-frame);
+              backdrop-filter: blur(40px);
+              position: absolute;
+              transform: translate(-50%, -50%);
+              padding: 0 .25rem;
+            }
+          }
+        }
       }
     }
   }

@@ -10,21 +10,37 @@
   <body>
     <div class="base">
       <form method="POST">
-        {% csrf_token %}
         {% if done %}
-        <h1 style="color: red;">{{ msg }}</h1>
-        {% else %}
-          <h1>Login Page</h1>
-        {% endif %}
-        <span class="input">
-          <label for="username">Username/Email: <span>*</span></label>
-          <input type="text" name="username" id="username" required />
-        </span>
-        <span class="input">
-          <label for="password">Password: <span>*<span></label>
-          <input type="password" name="password" id="password" min_length="8">        
-        </span>
-        <input type="submit" value="Login">
+          <h1 class="title" style="color: red;">{{ msg }}</h1>
+          {% else %}
+            <h1 class="title">Login Page</h1>
+          {% endif %}
+        <div>
+          <div class="login">
+            {% csrf_token %} 
+            <span class="input">
+              <input type="text" name="username" placeholder="Email" id="username" required />
+            </span>
+            <span class="input">
+              <input type="password" name="password" id="password" min_length="8" placeholder="Password [8 minimum characters]" required>        
+            </span>
+          </div>
+          <div class="media-sites">
+            <div>
+              <input type="submit" class="sign-button" value="Sign In">
+              <p>Don't have an account? <a href="../reg">Register here</a>
+            </div>
+            <p class="or-separator">
+              <span>OR</span>
+            </p>
+            <button class="button-platform">
+              G Google
+            </button>
+            <button class="button-platform">
+              f Facebook
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   </body>

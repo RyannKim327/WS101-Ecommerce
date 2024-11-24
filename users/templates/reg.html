@@ -11,31 +11,39 @@
     <div class="base">
       <form method="POST">
         {% csrf_token %}
-        <h1>Sign up</h1>
-        <span class="input">
-          <label for="username">Username: <span>*</span></label>
-          <input type="text" name="username" id="username" required />
-        </span>
-        <span class="input">
-          <label for="email">Email: <span>*</span></label>
-          <input type="email" name="email" id="email" required />
-        </span>
-
-        <span class="input">
-          <label for="password">Passsword: <span>*</span></label>
-          <input type="password" name="password" id="password" required />
-        </span>
-
-        <span class="input">
-          <label for="rpw">Retype Password: <span>*</span></label>
-          <input type="password" name="rpw" id="rpw" required />
-        </span>
-        <input
-          style="display: none"
-          id="signup"
-          type="submit"
-          value="Sign up"
-        />
+        <h1 class="title">Sign up</h1>
+        <div>
+          <div>
+            {% csrf_token %} 
+            <span class="input">
+              <input type="text" name="fullname" placeholder="Fullname" id="fullname" required>
+            </span>
+            <span class="input">
+              <input type="text" name="username" placeholder="Email" id="username" required />
+            </span>
+            <span class="input">
+              <input type="password" name="password" id="password" min_length="8" placeholder="Password [8 minimum characters]" required>        
+            </span>
+            <span class="input">
+              <input type="password" name="rpw" id="rpw" placeholder="Conofirm your password" required>
+            </span>
+          </div>
+          <div class="media-sites">
+            <div>
+              <input type="submit" class="sign-button" value="Sign Up">
+              <p>Already have an account? <a href="../login">Sign In here</a>
+            </div>
+            <p class="or-separator">
+              <span>OR</span>
+            </p>
+            <button class="button-platform">
+              G Google
+            </button>
+            <button class="button-platform">
+              f Facebook
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   </body>

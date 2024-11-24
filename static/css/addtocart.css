@@ -85,16 +85,41 @@ body {
         width: 100%;
         border: 1px red dotted;
 
-        > .product-info {
+        > div{
           display: flex;
           flex-direction: column;
+          justify-content: flex-end;
           flex-grow: 1;
-        }
-        > span {
-          padding: 1rem 0;
+          padding: 0 .5rem;
+
+          > .product-base{
+            display: flex;
+
+            > .product-info {
+              display: flex;
+              flex-direction: column;
+              flex-grow: 1;
+
+              > * {
+                font-size: 2rem;
+              }
+            }
+            > .bookmark {
+              padding: .5rem 1.5rem;
+              > i {
+                font-size: 2rem;
+              }
+            }
+          }
+
+          > span {
+            padding: .5rem 0;
+          }
         }
 
         > footer {
+          position: relative;
+          bottom: 0;
           display: flex;
           background-color: var(--header-background);
           color: black;
@@ -104,15 +129,18 @@ body {
 
           > .icons {
             display: flex;
+
             > .image-icon {
               display: flex;
               flex-direction: column;
               justify-content: center;
               align-items: center;
               margin: 0.5rem;
+              cursor: pointer;
 
               > i {
                 font-size: 1.5rem;
+                
               }
 
               > span {
