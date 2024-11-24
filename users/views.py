@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Q
 from .models import User
-from .middlewares import password
+from .middlewares import *
 
 # Create your views here.
 
@@ -12,6 +12,9 @@ def index(request):
 def encrypt(pw): 
     a = password(pw)
     return a
+
+def test(request):
+    return HttpResponse(decrypt(request.COOKIES.get("userInfo")))
 
 def login(request):
     # TODO: To create a basic login session
@@ -23,7 +26,12 @@ def login(request):
         if users:
             users = User.objects.get(Q(username=request.POST.get('username')) | Q(email=request.POST.get("username")))
             if users.password == encrypt(request.POST.get("password")):
-                return HttpResponse("<h1>Done</h1>")
+                response = HttpResponse("<h1>Done</h1>")
+                cookie = setCookies(response, "userInfo", users.username)
+                if cookie.get("result"):
+                    return response
+                else:
+                    return HttpResponse(f"<h1>Error: {cookie.get('message')}</h1>")
             else:
                 context = {
                     "done": True,
