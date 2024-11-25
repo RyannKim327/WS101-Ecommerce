@@ -26,8 +26,12 @@
           <ul>
             <li>Home</li>
             <li>Help</li>
-            <li><a href="user/login/">Login</a></li>
-            <li><a href="user/reg/">Sign Up</a></li>
+            {% if cookie %}
+              <li>{{ cookie }}</li>
+            {% else %}
+              <li><a href="user/login/">Login</a></li>
+              <li><a href="user/reg/">Sign Up</a></li>
+            {% endif %}
           </ul>
         </nav>
       </header>

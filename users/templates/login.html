@@ -12,12 +12,12 @@
       <form method="POST">
         {% if done %}
           <h1 class="title" style="color: red;">{{ msg }}</h1>
-          {% else %}
-            <h1 class="title">Login Page</h1>
-          {% endif %}
+        {% else %}
+          <h1 class="title">Login Page</h1>
+        {% endif %}
+        {% csrf_token %}
         <div>
           <div class="login">
-            {% csrf_token %} 
             <span class="input">
               <input type="text" name="username" placeholder="Email | Username" id="username" required />
             </span>

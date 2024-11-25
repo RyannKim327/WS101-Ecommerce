@@ -17,7 +17,6 @@ def test(request):
     return HttpResponse(decrypt(request.COOKIES.get("userInfo")))
 
 def login(request):
-    # TODO: To create a basic login session
     context = {
         "done": False
     }
@@ -26,7 +25,7 @@ def login(request):
         if users:
             users = User.objects.get(Q(username=request.POST.get('username')) | Q(email=request.POST.get("username")))
             if users.password == encrypt(request.POST.get("password")):
-                response = HttpResponse("<h1>Done</h1>")
+                response = HttpResponse(b"<h1>Done</h1>")
                 cookie = setCookies(response, "userInfo", users.username)
                 if cookie.get("result"):
                     return response
@@ -42,9 +41,21 @@ def login(request):
                 "done": True,
                 "msg": "Account not found"
             }
-
     # TODO: To create a login catch
-    return render(request, "login.html", context)
+    # return render(request, "login.html", context)
+
+    try:
+        cookie = request.COOKIES.get("userInfo")
+        if cookie:
+            return HttpResponse("<script>location.href='../..'</script>")
+        else:
+            return render(request, "login.html", context)
+    except:
+        # TODO: To create a basic login session
+        context = {
+            "done": False
+        }
+        return render(request, "login.html", context)
 
 def register(request):
     if request.method == "POST":
@@ -55,10 +66,20 @@ def register(request):
         pw = encrypt(request.POST.get("password"))
         if pw == encrypt(request.POST.get("rpw")):
             # TODO: Register account
-            
             usr = User(username=data.get("username"), email=data.get("email"), password=pw)
             usr.save()
-            return HttpResponse("<h1>Done</h1>")
+            return HttpResponse(b"<h1>Done</h1>")
         else:
             return HttpResponse("<h1>Invalid passwords</h1>")
-    return render(request, "reg.html")
+    
+    try:
+        cookie = request.COOKIES.get("userInfo")
+        if cookie:
+            return HttpResponse("<script>location.href='../..'</script>")
+        else:
+            return render(request, "reg.html")
+    except:
+        return render(request, "reg.html")
+
+
+    

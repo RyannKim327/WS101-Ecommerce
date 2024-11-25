@@ -1,20 +1,28 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import *
+from .middlewares import *
+
 
 # Create your views here.
 def index(request):
-    ctx = {
-      "categories": [
-        "Mobiles",
-        "Clothes",
-        "Cameras",
-        "Shoes",
-        "Keyboard",
-        "Perfume"
-      ]
-    }
-    return render(request, "index.html", ctx)
+  cookie = ""
+  try:
+    cookie = decrypt(request.COOKIES.get("userInfo"))
+  except:
+     pass
+  ctx = {
+    "categories": [
+      "Mobiles",
+      "Clothes",
+      "Cameras",
+      "Shoes",
+      "Keyboard",
+      "Perfume"
+    ],
+    "cookie": cookie
+  }
+  return render(request, "index.html", ctx)
 
 def addtocart(request, id):
   try:
