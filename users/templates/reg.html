@@ -11,7 +11,11 @@
     <div class="base">
       <form method="POST">
         {% csrf_token %}
-        <h1 class="title">Sign up</h1>
+        {% if info %}
+          <h1 class="title">{{ info }}</h1>
+        {% else %}
+          <h1 class="title">Sign up</h1>
+        {% endif %}
         <div>
           <div> 
             <span class="input">
@@ -33,7 +37,7 @@
           <div class="media-sites">
             <div>
               <input type="submit" class="sign-button" value="Sign Up">
-              <p>Already have an account? <a href="../login">Sign In here</a>
+              <p>Already have an account? <a href="{% url 'USER:LOGIN' %}">Sign In here</a>
             </div>
             <p class="or-separator">
               <span>OR</span>

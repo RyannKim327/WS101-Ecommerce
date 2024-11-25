@@ -27,10 +27,10 @@
             <li>Home</li>
             <li>Help</li>
             {% if cookie %}
-              <li><a href="user/logout">{{ cookie }}</a></li>
+              <li><a href="{% url 'USER:LOGOUT' %}">{{ cookie }}</a></li>
             {% else %}
-              <li><a href="user/login/">Login</a></li>
-              <li><a href="user/reg/">Sign Up</a></li>
+              <li><a href="{% url 'USER:LOGIN' %}/">Login</a></li>
+              <li><a href="{% url 'USER:REGISTER' %}">Sign Up</a></li>
             {% endif %}
           </ul>
         </nav>

@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from .models import User
 from .middlewares import *
@@ -7,7 +8,7 @@ from .middlewares import *
 # Create your views here.
 
 def index(request):
-    return HttpResponse("<script>location.href='login/'</script>")
+    return redirect("USER:LOGIN") # HttpResponse("<script>location.href='login/'</script>")
 
 def encrypt(pw): 
     a = password(pw)
@@ -25,7 +26,7 @@ def login(request):
         if users:
             users = User.objects.get(Q(username=request.POST.get('username')) | Q(email=request.POST.get("username")))
             if users.password == encrypt(request.POST.get("password")):
-                response = HttpResponse(b"<h1>Done</h1>")
+                response = redirect("PRODUCTS:INDEX") # HttpResponse(b"<h1>Done</h1>")
                 cookie = setCookies(response, "userInfo", users.username)
                 if cookie.get("result"):
                     return response
@@ -47,7 +48,8 @@ def login(request):
     try:
         cookie = request.COOKIES.get("userInfo")
         if cookie:
-            return HttpResponse("<script>location.href='../..'</script>")
+            # return HttpResponse("<script>location.href='../..'</script>")
+            return redirect("PRODUCTS:INDEX")
         else:
             return render(request, "login.html", context)
     except:
@@ -58,31 +60,34 @@ def login(request):
         return render(request, "login.html", context)
 
 def register(request):
+    ctx = {
+        "name": "Sign up"
+    }
     if request.method == "POST":
         data = request.POST
         user = User.objects.filter(Q(username=data.get("username")) | Q(email=data.get("email")))
         if user:
-            return HttpResponse("<h1>Existed</h1>")
+            return render(request, "reg.html", context={"info": "User is already existed"})
         pw = encrypt(request.POST.get("password"))
         if pw == encrypt(request.POST.get("rpw")):
             # TODO: Register account
             usr = User(username=data.get("username"), email=data.get("email"), password=pw)
             usr.save()
-            return HttpResponse(b"<h1>Done</h1>")
+            return redirect("PRODUCTS:INDEX")
         else:
-            return HttpResponse("<h1>Invalid passwords</h1>")
+            return render(request, "reg.html", context={"info": "Invalid passwords"})
     
     try:
         cookie = request.COOKIES.get("userInfo")
         if cookie:
-            return HttpResponse("<script>location.href='../..'</script>")
+            return redirect("PRODUCTS:INDEX") # HttpResponse("<script>location.href='../..'</script>")
         else:
             return render(request, "reg.html")
     except:
         return render(request, "reg.html")
 
 def logout(request):
-    response = HttpResponse("<script>location.href='../..'</script>")
+    response = redirect("PRODUCTS:INDEX") # HttpResponse("<script>location.href='../..'</script>")
     response.delete_cookie("userInfo")
     return response
 
