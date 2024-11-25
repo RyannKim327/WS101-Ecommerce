@@ -81,5 +81,9 @@ def register(request):
     except:
         return render(request, "reg.html")
 
+def logout(request):
+    response = HttpResponse("<script>location.href='../..'</script>")
+    response.delete_cookie("userInfo")
+    return response
 
     

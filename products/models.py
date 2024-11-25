@@ -9,6 +9,16 @@ class Product(models.Model):
     # expiryDate = models.DateField()
     img = models.TextField()
     category = models.CharField(max_length=100, null=False)
+    price = models.IntegerField()
 
     def __str__(self):
         return f"{self.productName} - {self.productDescription}"
+
+class Orders(models.Model):
+    orderID = models.AutoField(primary_key=True, unique=True)
+    productID = models.CharField(max_length=1000, null=False)
+    userInfo = models.CharField(max_length=25, null=True)
+    quantuty = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.orderID} - {self.productID} - {self.userInfo}"
