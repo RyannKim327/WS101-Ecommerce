@@ -18,9 +18,9 @@
         {% endif %}
         <div>
           <div> 
-            <span class="input">
-              <input type="text" name="fullname" placeholder="Fullname" id="fullname" required>
-            </span>
+            <!-- <span class="input"> -->
+            <!--   <input type="text" name="fullname" placeholder="Fullname" id="fullname" required> -->
+            <!-- </span> -->
             <span class="input">
               <input type="text" name="username" placeholder="Username" id="username" required>
             </span>
@@ -43,10 +43,12 @@
               <span>OR</span>
             </p>
             <button class="button-platform">
-              G Google
+              <img src="{% static 'assets/icons/google.png' %}">
+              <span>Google</span>
             </button>
             <button class="button-platform">
-              f Facebook
+              <img src="{% static 'assets/icons/facebook.png' %}">
+              <span>Facebook</span>
             </button>
           </div>
         </div>

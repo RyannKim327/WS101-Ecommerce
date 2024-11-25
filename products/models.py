@@ -14,7 +14,7 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.productName} - {self.productDescription}"
 
-class Orders(models.Model):
+class Order(models.Model):
     orderID = models.AutoField(primary_key=True, unique=True)
     productID = models.CharField(max_length=1000, null=False)
     userInfo = models.CharField(max_length=25, null=True)
