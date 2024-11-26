@@ -45,6 +45,14 @@ def addproduct(request):
     # if form.is_valid():
     #   form.save()
     #   img = form.instance()
+    categories = [
+      "Mobiles",
+      "Clothes",
+      "Cameras",
+      "Shoes",
+      "Keyboard",
+      "Perfume"
+    ]
     data = request.POST
     product = Product(
       productName = data.get("product-name"),
@@ -52,7 +60,7 @@ def addproduct(request):
       manufacturer = data.get("manufacturer"),
       price = data.get("price"),
       productImage = request.FILES["product-image"],
-      category = data.get("category")
+      category = categories[data.get("category") % len(categories)]
     )
     product.save()
 
@@ -60,12 +68,30 @@ def addproduct(request):
     pass
   ctx = {
     "categories": [
-      "Mobiles",
-      "Clothes",
-      "Cameras",
-      "Shoes",
-      "Keyboard",
-      "Perfume"
+      {
+        "id": 0,
+        "name": "Mobiles"
+      },
+      {
+        "id": 1,
+        "name": "Clothes"
+      },
+      {
+        "id": 2,
+        "name": "Cameras"
+      },
+      {
+        "id": 3,
+        "name": "Shoes"
+      },
+      {
+        "id": 4,
+        "name": "Keyboard"
+      },
+      {
+        "id": 5,
+        "name": "Perfume"
+      }
     ]
   }
   return render(request, "addproduct.html", ctx)
