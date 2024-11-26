@@ -1,0 +1,54 @@
+@import url("base.css");
+
+:root {
+  --header-background: #fbf8ef;
+  --main-color: #000000;
+  --image-background: #c9e6f0;
+  --main-background: #78b3ce;
+  --main-frame: #c9c6f0;
+}
+
+body {
+  width: 100dvw;
+  height: 100dvh;
+
+  > .base {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-background);
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    > form {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--main-frame);
+      padding: 0.5rem;
+      border-radius: 0.75rem;
+      width: 25%;
+
+      > h1,
+      > h3 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      > input,
+      > textarea,
+      > .input {
+        background-color: white;
+        padding: 1rem;
+        margin: 0.25rem 0;
+        border-radius: 0.5rem;
+        resize: none;
+
+        > select {
+          margin-left: 1rem;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

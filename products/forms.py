@@ -1,9 +1,16 @@
-from django.db import models
-from django.forms import fields
+# from django.db import models
+# from django.forms import fields
 from django import forms
 from .models import Product
 
 class ProductImage(forms.ModelForm):
-    class meta:
+    class Meta:
         models = Product
-        fields = '__all_'
+        fields = [
+            'productName',
+            'productDescription',
+            'productImage',
+            'price',
+            'manufacturer',
+            'category'
+        ]

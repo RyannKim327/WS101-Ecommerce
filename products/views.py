@@ -40,12 +40,23 @@ def addtocart(request, id):
     return HttpResponse("<script>alert('You need to login first');location.href='../../user/'</script>")
 
 def addproduct(request):
-  if request.method == "POST":
-    form = ProductImage(request.POST, request.FILES)
-    if form.is_valid():
-      form.save()
-      img = form.instance()
-      return HttpResponse("Done")
+  if request.method == "POST" and request.FILES['product-image']:
+    # form = ProductImage(request.POST, request.FILES)
+    # if form.is_valid():
+    #   form.save()
+    #   img = form.instance()
+    data = request.POST
+    product = Product(
+      productName = data.get("product-name"),
+      productDescription = data.get("product-description"),
+      manufacturer = data.get("manufacturer"),
+      price = data.get("price"),
+      productImage = request.FILES["product-image"],
+      category = data.get("category")
+    )
+    product.save()
+
+    return render(request, "addproduct.html", {'success': 'Product Added'})
     pass
   ctx = {
     "categories": [
