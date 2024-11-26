@@ -60,7 +60,7 @@ def addproduct(request):
       manufacturer = data.get("manufacturer"),
       price = data.get("price"),
       productImage = request.FILES["product-image"],
-      category = categories[data.get("category") % len(categories)]
+      category = categories[int(data.get("category")) % len(categories)]
     )
     product.save()
 
