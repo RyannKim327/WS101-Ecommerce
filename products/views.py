@@ -109,13 +109,15 @@ def categories(request, category):
       "Perfume"
   ]
   
-  data = decrypt(request.COOKIES.get("userInfo"))
+  data = request.COOKIES.get("userInfo")
   ctx = {
-    "cookie": data,
     "filtered": False,
     "category_lists": categories
   }
-  print(category.capitalize())
+  
+  if(data):
+    ctx['cookie'] = decrypt(data)
+  
   if category.capitalize() in categories:
     products = Product.objects.filter(category=category.capitalize())
     ctx['data'] = products

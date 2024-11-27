@@ -6,6 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Filter | {{ category }}</title>
     <link href="{% static 'css/products.css' %}" rel="stylesheet" />
+    <style>
+      body{
+        > .base {
+          width: 100;
+          > main{
+            width: 100%;
+            > .container{
+              display: flex;
+              width: 100%;
+
+              > #categories {
+                background-color: red;
+                width:: 100%;
+              }
+              > .contents {
+                background-color: lightblue;
+              }
+            }
+          }
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="base">
@@ -33,6 +55,7 @@
             {% endfor %}
           </ul>
           <div class="contents">
+            sdfg
             {% if filtered %}
               {% if data %}
                 {% for i in data %}
