@@ -22,7 +22,7 @@ def login(request):
         "done": False
     }
     if request.method == "POST":
-        users = User.objects.filter(Q(username=request.POST.get("username")) | Q(email=request.POST.get("username")))
+        users = User.objects.filter(Q(lowerUsername=request.POST.get("username").lower()) | Q(email=request.POST.get("username")))
         if users:
             users = User.objects.get(Q(username=request.POST.get('username')) | Q(email=request.POST.get("username")))
             if users.password == encrypt(request.POST.get("password")):
@@ -65,15 +65,18 @@ def register(request):
     }
     if request.method == "POST":
         data = request.POST
-        user = User.objects.filter(Q(username=data.get("username")) | Q(email=data.get("email")))
+        user = User.objects.filter(Q(lowerUsername=data.get("username").lower()) | Q(email=data.get("email")))
         if user:
             return render(request, "reg.html", context={"info": "User is already existed"})
         pw = encrypt(request.POST.get("password"))
         if pw == encrypt(request.POST.get("rpw")):
             # TODO: Register account
-            usr = User(username=data.get("username"), email=data.get("email"), password=pw)
+            usr = User(username=data.get("username"), lowerUsername=data.get("username").lower(), email=data.get("email"), password=pw)
             usr.save()
-            return redirect("PRODUCTS:INDEX")
+            response = redirect("PRODUCTS:INDEX")
+            cookie = setCookies(response, "userInfo", data.get("username"))
+            if cookie.get("result"):
+                return response
         else:
             return render(request, "reg.html", context={"info": "Invalid passwords"})
     

@@ -6,6 +6,6 @@ app_name = "PRODUCTS"
 urlpatterns = [
     path("", index, name="INDEX"),
     path("addtocart/<int:id>", addtocart, name="ADDTOCART"),
-    path("addproduct", addproduct, name="ADDPRODUCT")
-
+    path("addproduct", addproduct, name="ADDPRODUCT"),
+    path("category/<str:category>", categories, name="CATEGORY")
 ]

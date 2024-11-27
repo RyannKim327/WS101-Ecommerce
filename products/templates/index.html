@@ -20,22 +20,7 @@
   </head>
   <body>
     <div class="base">
-      <header>
-        <img src="{% static 'assets/logo.png' %}" alt="Logo" />
-        <nav>
-          <ul>
-            <li>Home</li>
-            <li>Help</li>
-            {% if cookie %}
-              <li><a href="{% url 'USER:LOGOUT' %}">{{ cookie }}</a></li>
-            {% else %}
-              <li><a href="{% url 'USER:LOGIN' %}/">Login</a></li>
-              <li><a href="{% url 'USER:REGISTER' %}">Sign Up</a></li>
-            {% endif %}
-            <li>
-          </ul>
-        </nav>
-      </header>
+      {% include 'header.html' %}      
       <main>
         <div class="search-section">
           <span>
@@ -93,5 +78,12 @@
         </div>
       </main>
     </div>
+    <script>
+      function logout(){
+        if(confirm("Are you sure you want to logout?")){
+          location.href = "{% url 'USER:LOGOUT' %}"
+        }
+      }
+    </script>
   </body>
 </html>

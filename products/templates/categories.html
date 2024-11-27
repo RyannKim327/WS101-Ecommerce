@@ -1,0 +1,52 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Filter | {{ category }}</title>
+    <link href="{% static 'css/products.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="base">
+      {% include 'header.html' %}
+      <main>
+        <div class="search-section">
+          <span>
+            <span>
+              <input
+                type="search"
+                name="search"
+                placeholder="Search product... "
+              />
+              <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </span>
+            <i class="cart fa-solid fa-cart-shopping"></i>
+          </span>
+        </div>
+        <div class="container">
+          <ul id="categories">
+            {% for category in category_lists %}
+              <li>{{ category }}</li>
+            {% endfor %}
+          </ul>
+          <div class="contents">
+            {% if filtered %}
+              {% if data %}
+                {% for i in data %}
+                  <span>{{ i.productName }}</span>
+                {% endfor %}
+              {% else %}
+                <h1>No data gathered</h1>
+              {% endif %}
+            {% else %}
+            <h1>Invalid Filter Key</h1>
+            {% endif %}
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

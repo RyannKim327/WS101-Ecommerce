@@ -6,6 +6,7 @@ from django.forms import PasswordInput
 class User(models.Model):
     userID = models.AutoField(primary_key=True, unique=True)
     username = models.CharField(max_length=25, null=False)
+    lowerUsername = models.CharField(max_length=25, null=False, default="")
     firstname = models.CharField(max_length=25, null=False, default="")
     middlename = models.CharField(max_length=25, blank=True)
     lastname = models.CharField(max_length=25, null=False, default="")
@@ -14,7 +15,7 @@ class User(models.Model):
     password = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.email} - {self.lastname} {self.firstname} {self.middlename}"
+        return f"{self.email} - {self.username}"
 
 class Store(models.Model):
     storeID = models.AutoField(primary_key=True, unique=True)

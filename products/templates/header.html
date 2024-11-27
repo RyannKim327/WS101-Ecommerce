@@ -1,0 +1,17 @@
+{% load static %}
+<header>
+  <img src="{% static 'assets/logo.png' %}" alt="Logo" />
+  <nav>
+    <ul>
+      <li>Home</li>
+      <li>Help</li>
+      {% if cookie %}
+      <li onclick="logout()">{{ cookie }}</li>
+      {% else %}
+      <li><a href="{% url 'USER:LOGIN' %}">Login</a></li>
+      <li><a href="{% url 'USER:REGISTER' %}">Sign Up</a></li>
+      {% endif %}
+      <li></li>
+    </ul>
+  </nav>
+</header>

@@ -99,3 +99,28 @@ def addproduct(request):
   }
   return render(request, "addproduct.html", ctx)
 
+def categories(request, category):
+  categories = [
+      "Mobiles",
+      "Clothes",
+      "Cameras",
+      "Shoes",
+      "Keyboard",
+      "Perfume"
+  ]
+  
+  data = decrypt(request.COOKIES.get("userInfo"))
+  ctx = {
+    "cookie": data,
+    "filtered": False,
+    "category_lists": categories
+  }
+  print(category.capitalize())
+  if category.capitalize() in categories:
+    products = Product.objects.filter(category=category.capitalize())
+    ctx['data'] = products
+    ctx['category'] = category.capitalize()
+    ctx['filtered'] = True
+    pass
+
+  return render(request, "categories.html", ctx)
