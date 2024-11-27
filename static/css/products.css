@@ -182,7 +182,7 @@ body {
             display: flex;
             flex-wrap: no-wrap;
             align-items: center;
-            justify-content: space-around;
+            /* justify-content: space-around; */
             /* aspect-ratio: 32/3; */
             width: 100%;
             overflow-x: scroll;
