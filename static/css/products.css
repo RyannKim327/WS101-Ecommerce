@@ -10,7 +10,8 @@
 
 body {
   > .base {
-    background-color: var(--main-background);
+    background-color: transparent;
+    /* background-color: var(--main-background); */
     width: 100%;
     height: 100%;
 
@@ -111,7 +112,7 @@ body {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        aspect-ratio: 16/4;
+        aspect-ratio: 16/3;
         box-sizing: border-box;
         width: 100%;
         background-color: transparent;
@@ -166,14 +167,20 @@ body {
         padding: 0 4rem;
 
         > div {
+          display: flex;
+          flex-direction: column;
           background-color: var(--category-background);
           color: white;
           padding-bottom: 1rem;
+          justify-content: center;
+          align-items: center;
+          overflow-x: hidden;
 
           > p {
             margin-left: 25px;
             font-size: 1.5rem;
             color: black;
+            width: 100%;
           }
 
           > .base-category {
@@ -181,13 +188,14 @@ body {
             color: white;
             display: flex;
             flex-wrap: no-wrap;
-            align-items: center;
-            /* justify-content: space-around; */
+            /* align-items: center; */
+            /* justify-items: center; */
+            /* justify-content: center; */
             /* aspect-ratio: 32/3; */
             width: 100%;
             overflow-x: scroll;
-            gap: 0 0.5rem;
-            padding: 0.5rem 0;
+            gap: 0 1rem;
+            padding: 0.5rem 1rem;
 
             > .category {
               display: flex;
