@@ -55,6 +55,7 @@ body {
       /* overflow: hidden; */
       /* overflow-y: scroll; */
       padding: 0 1rem;
+      width: 100%;
 
       > div:not(.search-section) {
         margin: 1rem 0;
@@ -167,6 +168,7 @@ body {
         > div {
           background-color: var(--category-background);
           color: white;
+          padding-bottom: 1rem;
 
           > p {
             margin-left: 25px;
@@ -188,14 +190,15 @@ body {
             > .category {
               display: flex;
               flex-direction: column;
-              background-color: white;
+              /* background-color: white; */
               color: black;
               align-items: center;
               height: 75%;
               padding: 1rem 0.75rem;
               aspect-ratio: 3/4;
-              border: 1px black solid;
-
+              /* border: 1px black solid; */
+              box-shadow: 3px 3px 5px rgba(33, 33, 33, 0.5);
+              border-radius: 0.25rem;
               /* &:nth-child(even) { */
               /*   margin: 0 0.5rem; */
               /* } */
@@ -208,6 +211,45 @@ body {
                 > img {
                   aspect-ratio: 1/1;
                 }
+              }
+            }
+          }
+        }
+      }
+      > .product {
+        width: 100%;
+        padding: 0 4rem;
+
+        > div {
+          background-color: var(--category-background);
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          color: black;
+
+          > .container {
+            display: flex;
+            flex-direction: row;
+            padding: 2rem;
+
+            > .content {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              /* background-color: white; */
+              /* border: 1px black solid; */
+              box-shadow: 3px 3px 5px rgba(33, 33, 33, 0.5);
+              border-radius: 0.25rem;
+              aspect-ratio: 2/3;
+              padding: 1rem;
+
+              > img {
+                width: 5rem;
+                aspect-ratio: 1/1;
+              }
+              > span {
+                padding: 0.5rem 0;
               }
             }
           }

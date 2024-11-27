@@ -10,7 +10,9 @@ def index(request):
   try:
     cookie = decrypt(request.COOKIES.get("userInfo"))
   except:
-     pass
+    pass
+  products = Product.objects.all()
+  print(products)
   ctx = {
     "categories": [
       "Mobiles",
@@ -20,7 +22,8 @@ def index(request):
       "Keyboard",
       "Perfume"
     ],
-    "cookie": cookie
+    "cookie": cookie,
+    "products": products
   }
   return render(request, "index.html", ctx)
 

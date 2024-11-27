@@ -80,9 +80,9 @@
             <div class="container">
               {% if products %}
                 {% for product in products %}
-                  <span>
-                    <!-- INFO: Image was stored in base64 format -->
-                    <img src="{{ product.img }}">
+                  <span class="content">
+                    <img src="{{ product.productImage.url }}" alt={{ product.productName }}>
+                    <span>{{ product.productName }}</span>
                   </span>
                 {% endfor %}
               {% else %}
