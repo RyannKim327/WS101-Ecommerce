@@ -32,6 +32,7 @@
               <li><a href="{% url 'USER:LOGIN' %}/">Login</a></li>
               <li><a href="{% url 'USER:REGISTER' %}">Sign Up</a></li>
             {% endif %}
+            <li>
           </ul>
         </nav>
       </header>
@@ -77,7 +78,7 @@
           <div>
             <p>Top Products</p>
             <div class="container">
-              {% if products1 %}
+              {% if products %}
                 {% for product in products %}
                   <span>
                     <!-- INFO: Image was stored in base64 format -->

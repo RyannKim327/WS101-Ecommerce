@@ -6,10 +6,12 @@ class Product(models.Model):
     productName = models.CharField(max_length=50, null=False)
     productDescription = models.TextField(null=False)
     manufacturer = models.CharField(max_length=100, null=False)
-    # expiryDate = models.DateField()
     productImage = models.ImageField(upload_to="products/")
+    productStore = models.CharField(max_length=100, default="")
     category = models.CharField(max_length=100, null=False)
     price = models.IntegerField()
+    avail = models.IntegerField(default=0)
+    stocks = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.productName} - {self.productDescription}"
@@ -18,7 +20,7 @@ class Order(models.Model):
     orderID = models.AutoField(primary_key=True, unique=True)
     productID = models.CharField(max_length=1000, null=False)
     userInfo = models.CharField(max_length=25, null=True)
-    quantuty = models.IntegerField()
+    quantity = models.IntegerField()
 
     def __str__(self):
         return f"{self.orderID} - {self.productID} - {self.userInfo}"
