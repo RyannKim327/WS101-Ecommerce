@@ -5,59 +5,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Add to Cart {{product.name}}</title>
+    <!-- <link href="{% static 'css/products.css' %}" rel="stylesheet" /> -->
     <link href="{% static 'css/addtocart.css' %}" rel="stylesheet" />
   </head>
   <body>
-    <div>
-      <header>
-        <i class="fa-solid fa-arrow-left"></i>
-        <span class="search">
-          <input type="search" />
-          <button>
-            <i class="fa-solid fa-search"g></i>
-          </button>
-        </span>
-        <i class="fa-solid fa-cart-shopping"></i>
-        <i class="fa-solid fa-ellipsis"></i>
-      </header>
+    <div class="base">
+      {% include "header.html" %}
+      <!-- <header> -->
+      <!--   <i class="fa-solid fa-arrow-left"></i> -->
+      <!--   <span class="search"> -->
+      <!--     <input type="search" /> -->
+      <!--     <button> -->
+      <!--       <i class="fa-solid fa-search"g></i> -->
+      <!--     </button> -->
+      <!--   </span> -->
+      <!--   <i class="fa-solid fa-cart-shopping"></i> -->
+      <!--   <i class="fa-solid fa-ellipsis"></i> -->
+      <!-- </header> -->
       <main>
-        <div class="image">
-          <img src="" alt="Image Screenshot">
-          <!-- TODO: Feedbacks or additional screenshots -->
-        </div>
         <div>
-          <div>
-            <div class="product-base">
-              <div class="product-info"> 
-                <h3>999</h3>
-                <p>Product name</p>
-                <p>Product description</p>
-              </div>
-              <span class="bookmark">
-              <i class="fa-regular fa-bookmark"></i>
-              </span>
-            </div>
-            <span><i class="fa-solid fa-star"></i> Ratings</span>
-            <span><i class="fa-solid fa-money-check"></i> Type of Payment</span>
+          <div class="image">
+            <img src="{{ product.productImage.url }}" alt="Image Screenshot">
           </div>
-          <footer>
-            <span class="icons">
-              <span class="image-icon">
-                <i class="fa-solid fa-store"></i>
-                <span>Shop</span>
-              </span>                                   
-              <span class="image-icon">
-                <i class="fa-solid fa-comments"></i>
-                <span>Messages</span>
-              </span>
-            </span>
-            <span class="buttons">
-              <button>Add to cart</button>
-              <button>Buy now</button>
-            </span>
-          </footer>
+          <div>
+            <div>
+              <div class="product-base">
+                <div class="product-info"> 
+                  <h3>₱ {{ product.price }}</h3>
+                  <p>{{ product.productName }}</p>
+                  <p>{{ product.productDescription }}</p>
+                </div>
+                <span class="bookmark">
+                <i class="fa-regular fa-bookmark"></i>
+                </span>
+              </div>
+              <span><i class="fa-solid fa-star"></i> Ratings</span>
+              <span><i class="fa-solid fa-money-check"></i> Type of Payment</span>
+            </div>
+          </div>
         </div>
+        <footer>
+          <span class="icons">
+            <span class="image-icon">
+              <i class="fa-solid fa-store"></i>
+              <span>Shop</span>
+            </span>                                   
+            <span class="image-icon">
+              <i class="fa-solid fa-comments"></i>
+              <span>Messages</span>
+            </span>
+          </span>
+          <span class="buttons">
+            <a href="{% url 'PRODUCTS:ADDEDTOCART' product.productID %}"><button>Add to cart</button></a>
+            <a href=""><button onclick="location.href=\"\"">Buy now</button></a>
+          </span>
+        </footer>
       </main>
     </div>
+    {% if valid %}
+      <script>
+        alert("{{valid}}")
+        location.href = "{% url 'PRODUCTS:INDEX' %}"
+      </script>
+    {% endif %}
   </body>
 </html>

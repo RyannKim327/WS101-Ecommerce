@@ -1,8 +1,11 @@
+from sys import exception
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from .middlewares import *
 from .forms import *
+
+from users.models import User
 
 # Create your views here.
 def index(request):
@@ -29,16 +32,25 @@ def index(request):
 
 def addtocart(request, id):
   try:
-    # cookie = request.COOKIE.get("user")
+    cookie = request.COOKIES.get("userInfo")
+    ctx = {
+      "cookie": decrypt(cookie)
+    }
+    
     try:
-      product = Product.objects.get(productID=id)
-      ctx = {
-        "product": product
-      }
+      prod = Product.objects.filter(productID=id)
+      if prod:
+        product = Product.objects.get(productID=id)
+        ctx['product'] = product
+      else:
+        ctx['valid'] = "There is no data existed"
+    
     except:
-      ctx = {}
+      pass
+
     return render(request, "addtocart.html", ctx)
-  except:
+  except Exception as e:
+    print(e)
     # TODO: To redirect to user's login for login and registration
     return HttpResponse("<script>alert('You need to login first');location.href='../../user/'</script>")
 
@@ -127,3 +139,24 @@ def categories(request, category):
     pass
 
   return render(request, "categories.html", ctx)
+
+def addedtocart(request, id):
+  try:
+    ctx = {}
+    cookie = decrypt(request.COOKIES.get("userInfo"))
+    user = User.objects.get(username=cookie)
+    # product = Product.object.get(productID=id)
+    cart = Cart({
+      "productID": id,
+      "userInfo": user.userID
+    })
+    cart.save()
+    crts = Cart.objects.filter(userInfo=user.userID)
+    ctx['products'] = crts
+    return render(request, "carts.html", ctx)
+  except Exception as e:
+    print(e)
+    pass
+  return redirect("PRODUCTS:INDEX")
+
+

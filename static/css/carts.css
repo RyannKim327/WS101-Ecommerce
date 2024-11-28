@@ -1,0 +1,19 @@
+@import url("base.css");
+
+body {
+  > .base {
+    width: 100%;
+    height: 100%;
+
+    > header {
+      display: flex;
+      flex-direction: row;
+
+      > .title {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+    }
+  }
+}

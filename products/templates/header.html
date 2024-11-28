@@ -1,6 +1,46 @@
 {% load static %}
+<head>
+<style>
+header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--header-background);
+  color: black;
+
+  > a {
+    > img {
+      width: 90px;
+      height: 76px;
+      /* aspect-ratio: 1/1; */
+    }
+  }
+
+  > nav {
+    > ul {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+
+      > li {
+        padding: 0 0.5rem;
+        font-size: 1.5rem;
+
+        > a {
+          text-decoration: none;
+          color: black;
+        }
+      }
+    }
+  }
+}
+</style>
+</head>
 <header>
-  <img src="{% static 'assets/logo.png' %}" alt="Logo" />
+  <a href="{% url 'PRODUCTS:INDEX' %}"><img src="{% static 'assets/logo.png' %}" alt="Logo" /></a>
   <nav>
     <ul>
       <li>Home</li>
@@ -15,3 +55,10 @@
     </ul>
   </nav>
 </header>
+<script>
+  function logout(){
+    if(confirm("Are you sure you want to logout?")){
+      location.href = "{% url 'USER:LOGOUT' %}"
+    }
+  }
+</script>
