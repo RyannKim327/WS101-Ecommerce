@@ -6,28 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Filter | {{ category }}</title>
     <link href="{% static 'css/products.css' %}" rel="stylesheet" />
-    <style>
-      body{
-        > .base {
-          width: 100;
-          > main{
-            width: 100%;
-            > .container{
-              display: flex;
-              width: 100%;
-
-              > #categories {
-                background-color: red;
-                width:: 100%;
-              }
-              > .contents {
-                background-color: lightblue;
-              }
-            }
-          }
-        }
-      }
-    </style>
   </head>
   <body>
     <div class="base">
@@ -48,18 +26,36 @@
             <i class="cart fa-solid fa-cart-shopping"></i>
           </span>
         </div>
-        <div class="container">
+        <div class="container-categories">
           <ul id="categories">
             {% for category in category_lists %}
               <li>{{ category }}</li>
             {% endfor %}
           </ul>
           <div class="contents">
-            sdfg
             {% if filtered %}
               {% if data %}
                 {% for i in data %}
-                  <span>{{ i.productName }}</span>
+                  <span class="box">
+                    {% if i.productImage.url %}
+                      <img src="{{i.productImage.url}}">
+                    {% endif %}
+                    
+                    <span>{{ i.productName }}</span>
+                                        
+                    {% if i.discount > 0 %}
+                      <span style="color: red; text-decoration: line-through; font-size: .75rem">₱ {{ i.price }}</span>
+                      <span id="discount"></span>
+                      <script>
+                        const discount = document.getElementById("discount")
+                        const price = "{{ i.price }}"
+                        const percent = "{{ i.discount }}"
+                        discount.textContent = `₱ ${price - (price / percent)}`
+                      </script>
+                    {% else %}
+                      <span><i class="fa-solid fa-peso-sign"></i> {{ i.price }}</span>
+                    {% endif %}
+                  </span>
                 {% endfor %}
               {% else %}
                 <h1>No data gathered</h1>

@@ -12,6 +12,7 @@ class Product(models.Model):
     price = models.IntegerField()
     avail = models.IntegerField(default=0)
     stocks = models.IntegerField(default=0)
+    discount = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.productName} - {self.productDescription}"

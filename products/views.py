@@ -121,6 +121,7 @@ def categories(request, category):
   if category.capitalize() in categories:
     products = Product.objects.filter(category=category.capitalize())
     ctx['data'] = products
+    # ctx['discounted'] = products.price - (products.price / products.discount)
     ctx['category'] = category.capitalize()
     ctx['filtered'] = True
     pass
