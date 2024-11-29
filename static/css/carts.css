@@ -1,5 +1,11 @@
 @import url("base.css");
 
+:root {
+  --product-background: #ffffff;
+  --product-color: #000000;
+  --header-background: #c3e6f0;
+}
+
 body {
   > .base {
     width: 100%;
@@ -8,11 +14,69 @@ body {
     > header {
       display: flex;
       flex-direction: row;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background-color: var(--header-background);
+      margin-bottom: 0.75rem;
+      z-index: 1;
+      padding: 0 1rem;
 
       > .title {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+      }
+      > i,
+      > a {
+        padding: 0.25rem;
+        font-size: 1.25rem;
+        cursor: pointer;
+        color: black;
+      }
+    }
+    > main {
+      > .base-product {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        gap: 0.75rem;
+        width: 100%;
+        align-items: center;
+
+        > .product {
+          display: flex;
+          flex-direction: column;
+          background-color: var(--product-background);
+          color: var(--product-color);
+          width: 75%;
+          padding: 0.5rem;
+          border-radius: 0.25rem;
+          align-items: center;
+
+          > .product-header {
+            display: flex;
+            width: 100%;
+            align-items: space-between;
+            justify-content: space-between;
+          }
+
+          > .product-body {
+            display: flex;
+            width: 100%;
+
+            > img {
+              width: 25%;
+              aspect-ratio: 1/1;
+            }
+
+            > .product-info {
+              margin-left: 25px;
+            }
+          }
+        }
       }
     }
   }

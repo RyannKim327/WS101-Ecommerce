@@ -36,7 +36,7 @@
             {% if filtered %}
               {% if data %}
                 {% for i in data %}
-                  <span class="box">
+                  <span onclick="addtocart('{{ i.productID }}')" class="box">
                     {% if i.productImage.url %}
                       <img src="{{i.productImage.url}}">
                     {% endif %}
@@ -67,5 +67,13 @@
         </div>
       </main>
     </div>
+    <script>
+      function addtocart(id){
+        const dir = "{% url 'PRODUCTS:ADDTOCART' 0 %}".replace(/0$/, "")
+        if(confirm("Do want this product added to your cart?")){
+          location.href = `${dir}${id}`
+        }
+      }
+    </script>
   </body>
 </html>

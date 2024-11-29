@@ -18,18 +18,20 @@ class Product(models.Model):
     return f"{self.productName} - {self.productDescription}"
 
 class Cart(models.Model):
-  orderID = models.AutoField(primary_key=True, unique=True)
-  productID = models.CharField(max_length=1000, null=False)
-  userInfo = models.CharField(max_length=25, null=True)
+  cartID = models.AutoField(primary_key=True, unique=True)
+  productID = models.IntegerField()
+  userInfo = models.IntegerField()
+  storeID = models.IntegerField(default=1)
   quantity = models.IntegerField(default=1)
   
   def __str__(self):
-    return f"{self.orderID} - {self.productID} - {self.userInfo}"
+    return f"{self.cartID} - {self.productID} - {self.userInfo}"
 
 class Order(models.Model):
   orderID = models.AutoField(primary_key=True, unique=True)
-  productID = models.CharField(max_length=1000, null=False)
-  userInfo = models.CharField(max_length=25, null=True)
+  productID = models.IntegerField()
+  userInfo = models.IntegerField()
+  storeID = models.IntegerField(default=1)
   quantity = models.IntegerField(default=1)
 
   def __str__(self):

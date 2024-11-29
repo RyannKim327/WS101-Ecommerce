@@ -10,8 +10,48 @@
   <body>
     <div class="base">
       <header>
-        <i class="fa-solid fa-less-than"></i>
+        <a href="{% url 'PRODUCTS:INDEX' %}">
+          <i class="fa-solid fa-less-than"></i>
+        </a>
+        <div class="title">
+          <h3>Shopping cart ({{ total }})</h3>
+          <p>Lucena City</p>
+        </div>
+        <i class="fa-solid fa-trash-can"></i>
+        <i class="fa-regular fa-square-check"></i>
       </header>
+      <main>
+        <div class="base-product">
+          {% if products %}
+            {% for product in products %}
+              <div class="product">
+                <input id="order_{{ product.cartID }}" type="checkbox" style="hidden">
+                <div class="product-header">
+                  <span>
+                    <img src="" alt="shopImage">
+                    Shop name
+                  </span>
+                  <span>Coupons</span>
+                </div>
+                <div class="product-body">
+                  <img src="{{ product.product.productImage.url }}">
+                  <div class="product-info">
+                    <p>{{ product.product.productName }}</p>
+                    <p>{{ product.product.productDescription }}
+                    <p>Destination</p>
+                    <p>₱ {{ product.cost }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% if total == 0 %}
+            <div class="product">
+              <h2>There's nothing in your cart</h2>
+            </div>
+          {% endif %}
+        </div>
+      </main>
     </div>
   </body>
 </html>

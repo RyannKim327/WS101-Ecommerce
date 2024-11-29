@@ -49,7 +49,7 @@
             <p>Categories</p>
             <div class="base-category">
               {% if categories %} {% for category in categories %}
-              <span class="category">
+              <span onclick="category('{{ category }}')" class="category">
                 <span>
                   <img src="{% static 'assets/'|add:category|lower|add:'.png' %}">
                 </span>
@@ -78,5 +78,11 @@
         </div>
       </main>
     </div> 
+    <script>
+      function category(id){
+        const dir = "{% url 'PRODUCTS:CATEGORY' 0 %}".replace(/0$/, "")
+        location.href = `${dir}${id}`
+      }
+    </script>
   </body>
 </html>

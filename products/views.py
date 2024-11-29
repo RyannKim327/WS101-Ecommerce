@@ -146,17 +146,44 @@ def addedtocart(request, id):
     cookie = decrypt(request.COOKIES.get("userInfo"))
     user = User.objects.get(username=cookie)
     # product = Product.object.get(productID=id)
-    cart = Cart({
-      "productID": id,
-      "userInfo": user.userID
-    })
+    cart = Cart(
+      productID = id,
+      userInfo = user.userID
+    )
     cart.save()
-    crts = Cart.objects.filter(userInfo=user.userID)
-    ctx['products'] = crts
-    return render(request, "carts.html", ctx)
   except Exception as e:
     print(e)
     pass
-  return redirect("PRODUCTS:INDEX")
+  return redirect("PRODUCTS:CARTS")
 
+def viewcarts(request):
+  cookie = decrypt(request.COOKIES.get("userInfo"))
+  user = User.objects.get(username=cookie)
+  ctx = {}
+  crts = Cart.objects.filter(userInfo=user.userID)
+  carts = []
 
+  for cart in crts:
+    prod = Product.objects.get(productID=cart.productID)
+    cost = prod.price
+    if prod.discount > 0:
+      cost = prod.price - (prod.price / prod.discount)
+
+    carts.append({
+      "cartID": cart.cartID,
+      "product": prod,
+      "cost": cost
+    })
+  ctx['products'] = carts
+  ctx['total'] = len(crts)
+  return render(request, "carts.html", ctx)
+
+def deletecart(request):
+  if request.method == "POST":
+    data = request.POST.carts
+    for info in data:
+      id = info.orderID
+      Product.objects.get(orderID=id).delete()
+  return {
+    "done": True
+  }
