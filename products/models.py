@@ -31,7 +31,7 @@ class Order(models.Model):
   orderID = models.AutoField(primary_key=True, unique=True)
   productID = models.IntegerField()
   userInfo = models.IntegerField()
-  storeID = models.IntegerField(default=1)
+  # storeID = models.IntegerField(default=1)
   quantity = models.IntegerField(default=1)
   status = models.IntegerField(default=0)
   location = models.CharField(max_length=1000, null=False, default="")
