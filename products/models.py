@@ -33,6 +33,7 @@ class Order(models.Model):
   userInfo = models.IntegerField()
   storeID = models.IntegerField(default=1)
   quantity = models.IntegerField(default=1)
+  status = models.IntegerField(default=0)
 
   def __str__(self):
     return f"{self.orderID} - {self.productID} - {self.userInfo}"

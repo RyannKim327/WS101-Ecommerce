@@ -29,7 +29,7 @@
         <div class="container-categories">
           <ul id="categories">
             {% for category in category_lists %}
-              <li>{{ category }}</li>
+              <li onclick="goto('{% url 'PRODUCTS:CATEGORY' category %}')">{{ category }}</li>
             {% endfor %}
           </ul>
           <div class="contents">
@@ -70,9 +70,12 @@
     <script>
       function addtocart(id){
         const dir = "{% url 'PRODUCTS:ADDTOCART' 0 %}".replace(/0$/, "")
-        if(confirm("Do want this product added to your cart?")){
+        // if(confirm("Do want this product added to your cart?")){
           location.href = `${dir}${id}`
-        }
+        // }
+      }
+      function goto(url){
+        location.href = url
       }
     </script>
   </body>

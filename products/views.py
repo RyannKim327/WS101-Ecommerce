@@ -14,7 +14,7 @@ def index(request):
     cookie = decrypt(request.COOKIES.get("userInfo"))
   except:
     pass
-  products = Product.objects.all()
+  products = Product.objects.all()[:10]
   print(products)
   ctx = {
     "categories": [
