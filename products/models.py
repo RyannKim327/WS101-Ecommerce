@@ -34,6 +34,7 @@ class Order(models.Model):
   storeID = models.IntegerField(default=1)
   quantity = models.IntegerField(default=1)
   status = models.IntegerField(default=0)
+  location = models.CharField(max_length=1000, null=False, default="")
 
   def __str__(self):
     return f"{self.orderID} - {self.productID} - {self.userInfo}"
