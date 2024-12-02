@@ -9,8 +9,12 @@ from users.models import User
 # Create your views here.
 def index(request):
   cookie = ""
+  total = 0
   try:
     cookie = decrypt(request.COOKIES.get("userInfo"))
+    user = User.objects.get(username=cookie)
+    crts = Cart.objects.filter(userInfo=user.userID)
+    total = len(crts)
   except:
     pass
   products = Product.objects.all()[:10]
@@ -25,7 +29,8 @@ def index(request):
       "Perfume"
     ],
     "cookie": cookie,
-    "products": products
+    "products": products,
+    "total": total
   }
   return render(request, "index.html", ctx)
 
@@ -120,6 +125,7 @@ def categories(request, category):
       "Perfume"
   ]
   
+  total = 0
   data = request.COOKIES.get("userInfo")
   ctx = {
     "filtered": False,
@@ -128,14 +134,17 @@ def categories(request, category):
   
   if(data):
     ctx['cookie'] = decrypt(data)
-  
+    user = User.objects.get(username=decrypt(data))
+    crts = Cart.objects.filter(userInfo=user.userID)
+    total = len(crts)
+
   if category.capitalize() in categories:
     products = Product.objects.filter(category=category.capitalize())
     ctx['data'] = products
     # ctx['discounted'] = products.price - (products.price / products.discount)
     ctx['category'] = category.capitalize()
     ctx['filtered'] = True
-    pass
+    ctx['total'] = total
 
   return render(request, "categories.html", ctx)
 

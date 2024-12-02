@@ -24,7 +24,7 @@
       <main>
         <div class="search-section">
           <span>
-            <span>
+            <span class="input-section">
               <input
                 type="search"
                 name="search"
@@ -34,7 +34,10 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </span>
-            <i class="cart fa-solid fa-cart-shopping" onclick="tocart()"></i>
+            <span class="cart" onclick="tocart()">
+              <i class="fa-solid fa-cart-shopping" onclick="tocart()"></i>
+              <span class="count">{{ total }}</span>
+            </span>
           </span>
         </div>
         <div class="carousel">

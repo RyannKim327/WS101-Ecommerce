@@ -77,13 +77,14 @@ body {
           align-items: center;
           width: 75%;
 
-          > span {
+          > .input-section{
             background-color: var(--search-background);
             display: flex;
             border: 1px black solid;
             border-radius: 0.5rem;
             padding: 0.5rem 1rem;
-            width: 100%;
+            /* width: 100%; */
+            flex-grow: 1;
 
             > input {
               flex-grow: 1;
@@ -101,8 +102,24 @@ body {
             }
           }
           > .cart {
+            display: flex;
             padding: 0.5rem;
             margin-left: 1rem;
+            cursor: pointer;
+
+            > .count{
+              display: flex;
+              border-radius: 50px;
+              background-color: red;
+              color: white;
+              justify-content: center;
+              align-items: center;
+              width: 1.5rem;
+              aspect-ratio: 1/1;
+              transform: translate(-50%, -50%);
+              font-size: 1rem;
+              padding: .125rem;
+            }
           }
         }
       }
