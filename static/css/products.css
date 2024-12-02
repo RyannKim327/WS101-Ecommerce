@@ -208,6 +208,7 @@ body {
               flex-grow: 1;
               box-sizing: border-box;
               padding: 1rem 0.75rem;
+              cursor: pointer;
               /* aspect-ratio: 3/4; */
               /* border: 1px black solid; */
               box-shadow: 3px 3px 5px rgba(33, 33, 33, 0.5);
@@ -266,6 +267,7 @@ body {
               /* width: 100%; */
               /* aspect-ratio: 7/8; */
               padding: 1rem;
+              cursor: pointer;
 
               > img {
                 width: 8rem;
@@ -293,9 +295,10 @@ body {
         > #categories {
           width: 15%;
           list-style: none;
+          gap: 1rem;
 
-          > li:nth-child(even) {
-            margin: 0.5rem 0;
+          > li {
+            cursor: pointer;
           }
         }
 
@@ -320,6 +323,7 @@ body {
             box-sizing: border-box;
             padding: 0.5rem 1rem;
             width: 20%;
+            cursor: pointer;
             /* aspect-ratio: 5/8; */
 
             > img {

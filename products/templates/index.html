@@ -65,7 +65,7 @@
             <div class="container">
               {% if products %}
                 {% for product in products %}
-                  <span class="content">
+                  <span class="content" onclick="addtocart('{{ product.productID }}')">
                     <img src="{{ product.productImage.url }}" alt={{ product.productName }}>
                     <span>{{ product.productName }}</span>
                   </span>
@@ -79,6 +79,12 @@
       </main>
     </div> 
     <script>
+      function addtocart(id){
+        const dir = "{% url 'PRODUCTS:ADDTOCART' 0 %}".replace(/0$/, "")
+        // if(confirm("Do want this product added to your cart?")){
+          location.href = `${dir}${id}`
+        // }
+      }
       function category(id){
         const dir = "{% url 'PRODUCTS:CATEGORY' 0 %}".replace(/0$/, "")
         location.href = `${dir}${id}`
