@@ -9,23 +9,26 @@
   </head>
   <body>
     <div class="base">
-      <header>
-        <a href="{% url 'PRODUCTS:INDEX' %}">
-          <i class="fa-solid fa-less-than"></i>
-        </a>
-        <div class="title">
-          <h3>Shopping cart ({{ total }})</h3>
-          <p>Lucena City</p>
-        </div>
-        <i class="fa-solid fa-trash-can"></i>
-        <i class="fa-regular fa-square-check"></i>
-      </header>
+      {% include "header.html" %}
       <main>
         <div class="base-product">
           {% if products %}
+            <div class="heading">
+              <a href="{% url 'PRODUCTS:INDEX' %}">
+                <i class=""></i>
+              </a>
+              <div class="title">
+                <h3>Shopping cart ({{ total }})</h3>
+                <p>Lucena City</p>
+              </div>
+              <div class="icons">
+                <i onclick="delete_prods()" title="Remove to Cart" class="fa-solid fa-trash-can"></i>
+                <i onclick="order_prods()" title="Checkout" class="fa-solid fa-cart-shopping"></i>
+              </div>
+            </div>
             {% for product in products %}
-              <div class="product">
-                <input id="order_{{ product.cartID }}" type="checkbox" style="hidden">
+              <div id="order_base_{{ product.cartID }}" class="product" onclick="check_('{{product.cartID}}')">
+                <input id="order_{{ product.cartID }}" type="checkbox" style="display: none">
                 <div class="product-header">
                   <span>
                     <img src="" alt="shopImage">
@@ -43,7 +46,7 @@
                   </div>
                 </div>
               </div>
-            {% endfor %}
+            {% endfor %} 
           {% endif %}
           {% if total == 0 %}
             <div class="product">
@@ -53,5 +56,34 @@
         </div>
       </main>
     </div>
+    <script>
+      let products = []
+      
+      function check_(id){
+        const base = document.getElementById(`order_base_${id}`)
+        const input = document.getElementById(`order_${id}`)
+        input.checked = !input.checked
+        if(input.checked){
+          base.style.backgroundColor = "rgb(255, 200, 200)"
+          products.push(id)
+        }else{
+          base.style.backgroundColor = "white"
+          const index = products.indexOf(id)
+          if(index !== -1){
+            products.splice(index, 1)
+          }
+        }
+      }
+
+      function delete_prods(){
+        const data = products.join(",")
+        location.href = "{% url 'PRODUCTS:DELETECART' %}" + `?data=${encodeURIComponent(data)}`
+      }
+
+      function order_prods(){
+        const data = products.join(",")
+        location.href = "{% url 'PRODUCTS:ORDERCART' %}" + `?data=${encodeURIComponent(data)}`
+      }
+    </script>
   </body>
 </html>

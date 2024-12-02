@@ -34,7 +34,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </span>
-            <i class="cart fa-solid fa-cart-shopping"></i>
+            <i class="cart fa-solid fa-cart-shopping" onclick="tocart()"></i>
           </span>
         </div>
         <div class="carousel">
@@ -88,6 +88,9 @@
       function category(id){
         const dir = "{% url 'PRODUCTS:CATEGORY' 0 %}".replace(/0$/, "")
         location.href = `${dir}${id}`
+      }
+      function tocart(){
+        location.href = "{% url 'PRODUCTS:CARTS' %}"
       }
     </script>
   </body>

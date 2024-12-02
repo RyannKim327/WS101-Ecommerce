@@ -1,14 +1,90 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Orderls</title>
-    <link href="{% static 'css/orders.css' %} " rel="stylesheet" />
+    <title>Orders</title>
+    <link href="{% static 'css/carts.css' %}" rel="stylesheet" />
   </head>
   <body>
     <div class="base">
-      <header></header>
+      {% include "header.html" %}
+      <main>
+        <div class="base-product">
+          {% if products %}
+            <div class="heading">
+              <a href="{% url 'PRODUCTS:INDEX' %}">
+                <i class=""></i>
+              </a>
+              <div class="title">
+                <h3>Total orders ({{ total }})</h3>
+                <p>Lucena City</p>
+              </div>
+              <div class="icons">
+                <i onclick="delete_prods()" title="Remove to Cart" class="fa-solid fa-trash-can"></i>
+                <i onclick="order_prods()" title="Checkout" class="fa-solid fa-cart-shopping"></i>
+              </div>
+            </div>
+            {% for product in products %}
+              <div id="order_base_{{ product.cartID }}" class="product" onclick="check_('{{product.cartID}}')">
+                <input id="order_{{ product.cartID }}" type="checkbox" style="display: none">
+                <div class="product-header">
+                  <span>
+                    <img src="" alt="shopImage">
+                    Shop name
+                  </span>
+                  <span>Coupons</span>
+                </div>
+                <div class="product-body">
+                  <img src="{{ product.product.productImage.url }}">
+                  <div class="product-info">
+                    <p>{{ product.product.productName }}</p>
+                    <p>{{ product.product.productDescription }}
+                    <p>{{ product.location }}</p>
+                    <p>Status: {{ product.status }}</p>
+                    <p>₱ {{ product.cost }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %} 
+          {% endif %}
+          {% if total == 0 %}
+            <div class="product">
+              <h2>There's nothing in your cart</h2>
+            </div>
+          {% endif %}
+        </div>
+      </main>
     </div>
+    <script>
+      let products = []
+      
+      function check_(id){
+        const base = document.getElementById(`order_base_${id}`)
+        const input = document.getElementById(`order_${id}`)
+        input.checked = !input.checked
+        if(input.checked){
+          base.style.backgroundColor = "rgb(255, 200, 200)"
+          products.push(id)
+        }else{
+          base.style.backgroundColor = "white"
+          const index = products.indexOf(id)
+          if(index !== -1){
+            products.splice(index, 1)
+          }
+        }
+      }
+
+      function delete_prods(){
+        const data = products.join(",")
+        location.href = "{% url 'PRODUCTS:DELETECART' %}" + `?data=${encodeURIComponent(data)}`
+      }
+
+      function order_prods(){
+        const data = products.join(",")
+        location.href = "{% url 'PRODUCTS:ORDERCART' %}" + `?data=${encodeURIComponent(data)}`
+      }
+    </script>
   </body>
 </html>

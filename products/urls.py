@@ -10,6 +10,7 @@ urlpatterns = [
     path("category/<str:category>", categories, name="CATEGORY"),
     path("addedtocart/<int:id>", addedtocart, name="ADDEDTOCART"),
     path("carts", viewcarts, name="CARTS"),
-    path("deletecart", deletecart, name="DELETECART")
-
+    path("deletecart", deletecart, name="DELETECART"),
+    path("order", orderfromcart, name="ORDERCART"),
+    path("vieworders", vieworders, name="VIEWORDERS")
 ]

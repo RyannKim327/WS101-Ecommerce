@@ -156,33 +156,108 @@ def addedtocart(request, id):
   return redirect("PRODUCTS:CARTS")
 
 def viewcarts(request):
-  cookie = decrypt(request.COOKIES.get("userInfo"))
-  user = User.objects.get(username=cookie)
-  ctx = {}
-  crts = Cart.objects.filter(userInfo=user.userID)
-  carts = []
+  try:
+    cookie = decrypt(request.COOKIES.get("userInfo"))
+    user = User.objects.get(username=cookie)
+    ctx = {}
+    crts = Cart.objects.filter(userInfo=user.userID)
+    carts = []
 
-  for cart in crts:
-    prod = Product.objects.get(productID=cart.productID)
-    cost = prod.price
-    if prod.discount > 0:
-      cost = prod.price - (prod.price / prod.discount)
+    for cart in crts:
+      prod = Product.objects.get(productID=cart.productID)
+      cost = prod.price
+      if prod.discount > 0:
+        cost = prod.price - (prod.price / prod.discount)
 
-    carts.append({
-      "cartID": cart.cartID,
-      "product": prod,
-      "cost": cost
-    })
-  ctx['products'] = carts
-  ctx['total'] = len(crts)
-  return render(request, "carts.html", ctx)
+      carts.append({
+        "cartID": cart.cartID,
+        "product": prod,
+        "cost": cost
+      })
+    ctx['cookie'] = cookie
+    ctx['products'] = carts
+    ctx['total'] = len(crts)
+    return render(request, "carts.html", ctx)
+  except Exception as e:
+    print(e)
+  return redirect("PRODUCTS:INDEX")
 
 def deletecart(request):
-  if request.method == "POST":
-    data = request.POST.carts
+  try:
+    data = request.GET.get("data").split(",")
+    cookie = decrypt(request.COOKIES.get("userInfo"))
+    user = User.objects.get(username=cookie)
+
     for info in data:
-      id = info.orderID
-      Product.objects.get(orderID=id).delete()
-  return {
-    "done": True
-  }
+      id = int(info)
+      prod = Cart.objects.get(cartID=id)
+
+      if user.userID == prod.userInfo:
+        prod.delete()
+    return HttpResponse("working")
+  except:
+    pass
+  return HttpResponse("Error")
+
+def orderfromcart(request):
+  try:
+    data = request.GET.get("data").split(",")
+    cookie = decrypt(request.COOKIES.get("userInfo"))
+    user = User.objects.get(username=cookie)
+
+    for info in data:
+      id = int(info)
+      prod = Cart.objects.get(cartID=id)
+
+      if user.userID == prod.userInfo:
+        Order(
+          productID =  prod.productID,
+          userInfo = user.userID,
+          storeID = prod.storeID,
+          quantity = prod.quantity,
+          location = ""
+        ).save()
+        prod.delete()
+    return HttpResponse("working")
+  except Exception as e:
+    print(e)
+    pass
+  return HttpResponse("test")
+
+def vieworders(request):
+  try:
+    cookie = decrypt(request.COOKIES.get("userInfo"))
+    user = User.objects.get(username=cookie)
+    ctx = {}
+    orders = Order.objects.filter(userInfo=user.userID)
+    carts = []
+    status = [
+      "pending",
+      "shipping",
+      "packaging",
+      "delivery"
+    ]
+
+    for order in orders:
+      prod = Product.objects.get(productID=order.productID)
+      cost = prod.price
+      if prod.discount > 0:
+        cost = prod.price - (prod.price / prod.discount)
+
+      print(status[order.status])
+      carts.append({
+        "orderID": order.orderID,
+        "product": prod,
+        "cost": cost,
+        "location": order.location,
+        "status": status[order.status]
+      })
+    ctx['cookie'] = cookie
+    ctx['products'] = carts
+    ctx['total'] = len(orders)
+    return render(request, "orders.html", ctx)
+  except Exception as e:
+    print(e)
+  return redirect("PRODUCTS:INDEX")
+
+
