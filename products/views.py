@@ -10,11 +10,14 @@ from users.models import User
 def index(request):
   cookie = ""
   total = 0
+  totalorders = 0
   try:
     cookie = decrypt(request.COOKIES.get("userInfo"))
     user = User.objects.get(username=cookie)
     crts = Cart.objects.filter(userInfo=user.userID)
+    orders = Order.objects.filter(userInfo=user.userID)
     total = len(crts)
+    totalorders = len(orders)
   except:
     pass
   products = Product.objects.all()[:10]
@@ -30,15 +33,19 @@ def index(request):
     ],
     "cookie": cookie,
     "products": products,
-    "total": total
+    "total": total,
+    "totalorders": totalorders
   }
   return render(request, "index.html", ctx)
 
 def addtocart(request, id):
   try:
     cookie = request.COOKIES.get("userInfo")
+    users = User.objects.get(username=decrypt(cookie))
+    totalorders = len(Order.objects.filter(userInfo=users.userID))
     ctx = {
-      "cookie": decrypt(cookie)
+      "cookie": decrypt(cookie),
+      "totalorders": totalorders
     }
     
     try:
@@ -126,6 +133,7 @@ def categories(request, category):
   ]
   
   total = 0
+  totalorders = 0
   data = request.COOKIES.get("userInfo")
   ctx = {
     "filtered": False,
@@ -136,7 +144,9 @@ def categories(request, category):
     ctx['cookie'] = decrypt(data)
     user = User.objects.get(username=decrypt(data))
     crts = Cart.objects.filter(userInfo=user.userID)
+    orders = Order.objects.filter(userInfo=user.userID)
     total = len(crts)
+    totalorders = len(orders)
 
   if category.capitalize() in categories:
     products = Product.objects.filter(category=category.capitalize())
@@ -145,7 +155,7 @@ def categories(request, category):
     ctx['category'] = category.capitalize()
     ctx['filtered'] = True
     ctx['total'] = total
-
+    ctx['totalorders'] = totalorders
   return render(request, "categories.html", ctx)
 
 def addedtocart(request, id):
@@ -170,6 +180,7 @@ def viewcarts(request):
     user = User.objects.get(username=cookie)
     ctx = {}
     crts = Cart.objects.filter(userInfo=user.userID)
+    totalorders = len(Order.objects.filter(userInfo=user.userID))
     carts = []
 
     for cart in crts:
@@ -186,6 +197,7 @@ def viewcarts(request):
     ctx['cookie'] = cookie
     ctx['products'] = carts
     ctx['total'] = len(crts)
+    ctx['totalorders'] = totalorders
     return render(request, "carts.html", ctx)
   except Exception as e:
     print(e)
@@ -264,6 +276,7 @@ def vieworders(request):
     ctx['cookie'] = cookie
     ctx['products'] = carts
     ctx['total'] = len(orders)
+    ctx['totalorders'] = len(orders)
     return render(request, "orders.html", ctx)
   except Exception as e:
     print(e)

@@ -13,8 +13,8 @@ header {
 
   > a {
     > img {
-      width: 90px;
-      height: 76px;
+      width: 70px;
+      height: 56px;
       /* aspect-ratio: 1/1; */
     }
   }
@@ -24,14 +24,36 @@ header {
       display: flex;
       flex-direction: row;
       list-style: none;
+      align-items: center;
 
       > li {
         padding: 0 0.5rem;
-        font-size: 1.5rem;
+        font-size: 1rem !important;
 
         > a {
           text-decoration: none;
           color: black;
+        }
+
+        > .order {
+          display: flex;
+          padding: 0.25rem;
+          cursor: pointer;
+          align-items: center;
+
+          > .count{
+            display: flex;
+            border-radius: 50px;
+            background-color: red;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            transform: translate(-50%, -50%);
+            font-size: .75rem;
+            padding: .125rem;
+          }
         }
       }
     }
@@ -43,10 +65,16 @@ header {
   <a href="{% url 'PRODUCTS:INDEX' %}"><img src="{% static 'assets/logo.png' %}" alt="Logo" /></a>
   <nav>
     <ul>
-      <li>Home</li>
+      <li><a href="{% url 'PRODUCTS:INDEX' %}">Home</a></li>
       <li>Help</li>
       {% if cookie %}
       <li onclick="logout()">{{ cookie }}</li>
+      <li onclick="orders()">
+        <span class="order">
+          <i class="fa-solid fa-truck"></i>
+          <span class="count">{{ totalorders }}</span>
+        </span>
+      </li>
       {% else %}
       <li><a href="{% url 'USER:LOGIN' %}">Login</a></li>
       <li><a href="{% url 'USER:REGISTER' %}">Sign Up</a></li>
@@ -60,5 +88,8 @@ header {
     if(confirm("Are you sure you want to logout?")){
       location.href = "{% url 'USER:LOGOUT' %}"
     }
+  }
+  function orders(){
+    location.href = "{% url 'PRODUCTS:VIEWORDERS' %}"
   }
 </script>
