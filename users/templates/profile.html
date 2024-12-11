@@ -1,0 +1,61 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile Information</title>
+  <link href="{% static 'css/forms.css' %}" rel="stylesheet" />
+  <style>
+    body {
+      >form {
+        >div {
+          >.login {
+            display: flex;
+            flex-direction: column;
+
+            >.input {
+              width: 100%;
+              box-sizing: border-box;
+
+              >input {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="base">
+    <form method="POST">
+      <h1>Profile Information</h1>
+      {% csrf_token %}
+      <div class="form">
+        <span class="input">
+          <input name="firstname" id="firstname" placeholder="First name" type="text" value="{{ user.firstname }}"
+            required />
+        </span>
+        <span class="input">
+          <input name="middlename" id="middlename" placeholder="Middle name" type="text" value="{{ user.middlename }}"
+            required />
+        </span>
+        <span class="input">
+          <input name="lastname" id="lastname" placeholder="Last name" type="text" value="{{ user.lastname }}"
+            required />
+        </span>
+        <span class="input">
+          <input name="location" id="location" placeholder="location" type="text" value="{{ user.location }}"
+            required />
+        </span>
+        <input class="input" type="submit" value="Submit" />
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
