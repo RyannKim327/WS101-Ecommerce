@@ -24,19 +24,19 @@ def test(request):
 
 
 def profile(request):
-    if request.COOKIES.get("userInfo"):
+    print("Prof")
+    try:
         user = User.objects.get(username=decrypt(request.COOKIES.get("userInfo")))
         if request.method == "POST":
             data = request.POST
-            user.firstname = data.firstname
-            user.middlename = data.middlename
-            user.lastname = data.lastname
-            user.location = data.location
+            user.firstname = data.get("firstname")
+            user.middlename = data.get("middlename")
+            user.lastname = data.get("lastname")
+            user.location = data.get("location")
             user.save()
-            pass
-        user = User.objects.get(username=decrypt(request.COOKIES.get("userInfo")))
-        return render(request, "profile.html", {user: user})
-    return redirect("PRODUCTS:INDEX")
+        return render(request, "profile.html", {"user": user})
+    except Exception as e:
+        return redirect("PRODUCTS:INDEX")
 
 
 def login(request):

@@ -9,9 +9,9 @@
   <link href="{% static 'css/forms.css' %}" rel="stylesheet" />
   <style>
     body {
-      >form {
-        >div {
-          >.login {
+      >.base {
+        >form {
+          >.form {
             display: flex;
             flex-direction: column;
 
@@ -22,6 +22,10 @@
               >input {
                 width: 100%;
               }
+            }
+
+            .buttons {
+              display: flex;
             }
           }
         }
@@ -41,8 +45,8 @@
             required />
         </span>
         <span class="input">
-          <input name="middlename" id="middlename" placeholder="Middle name" type="text" value="{{ user.middlename }}"
-            required />
+          <input name="middlename" id="middlename" placeholder="Middle name" type="text"
+            value="{{ user.middlename }}" />
         </span>
         <span class="input">
           <input name="lastname" id="lastname" placeholder="Last name" type="text" value="{{ user.lastname }}"
@@ -52,7 +56,12 @@
           <input name="location" id="location" placeholder="location" type="text" value="{{ user.location }}"
             required />
         </span>
-        <input class="input" type="submit" value="Submit" />
+        <div class="buttons">
+          <input class="input" type="submit" value="Submit" />
+          <button onclick="location.href"='{% url "PRODUCTS:INDEX" %}'>
+            Cancel
+          </button>
+        </div>
       </div>
     </form>
   </div>

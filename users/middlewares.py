@@ -47,6 +47,6 @@ def checker(request):
     if cookie:
         user = decrypt(cookie)
         users = User.objects.get(username=user)
-        if not users.firstname and not users.lastname and not users.location:
-            # return True
-            return redirect("USERS:PROFILE")
+        if users.firstname == "" or users.lastname == "" or users.location == "":
+            return True
+    return False

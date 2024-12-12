@@ -19,7 +19,7 @@
               </a>
               <div class="title">
                 <h3>Total orders ({{ total }})</h3>
-                <p>Lucena City</p>
+                <p>{{ user.location }}<p>
               </div>
               <div class="icons">
                 <i onclick="delete_prods()" title="Remove to Cart" class="fa-solid fa-trash-can"></i>
@@ -41,7 +41,7 @@
                   <div class="product-info">
                     <p>{{ product.product.productName }}</p>
                     <p>{{ product.product.productDescription }}
-                    <p>{{ product.location }}</p>
+                    <!-- <p>{{ product.location }}</p> -->
                     <p>Status: {{ product.status }}</p>
                     <p>₱ {{ product.cost }}</p>
                   </div>

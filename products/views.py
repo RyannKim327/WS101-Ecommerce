@@ -12,9 +12,9 @@ def index(request):
     cookie = ""
     total = 0
     totalorders = 0
+    if checker(request):
+        return redirect("USER:PROFILE")
     try:
-        checker(request)
-
         cookie = decrypt(request.COOKIES.get("userInfo"))
         user = User.objects.get(username=cookie)
         crts = Cart.objects.filter(userInfo=user.userID)
@@ -24,21 +24,27 @@ def index(request):
     except:
         pass
     products = Product.objects.all()[:10]
-    print(products)
     ctx = {
-        "categories": ["Mobiles", "Clothes", "Cameras", "Shoes", "Keyboard", "Perfume"],
+        "categories": [
+            "Mobiles",
+            "Clothes",
+            "Cameras",
+            "Shoes",
+            "Keyboard",
+            "Perfume",
+        ],
         "cookie": cookie,
         "products": products,
         "total": total,
         "totalorders": totalorders,
     }
-    print(cookie)
     return render(request, "index.html", ctx)
 
 
 def addtocart(request, id):
+    if checker(request):
+        return redirect("USER:PROFILE")
     try:
-        checker(request)
         cookie = request.COOKIES.get("userInfo")
         users = User.objects.get(username=decrypt(cookie))
         totalorders = len(Order.objects.filter(userInfo=users.userID))
@@ -125,6 +131,8 @@ def categories(request, category):
 
 
 def addedtocart(request, id):
+    if checker(request):
+        return redirect("USER:PROFILE")
     try:
         ctx = {}
         cookie = decrypt(request.COOKIES.get("userInfo"))
@@ -139,6 +147,8 @@ def addedtocart(request, id):
 
 
 def viewcarts(request):
+    if checker(request):
+        return redirect("USER:PROFILE")
     try:
         cookie = decrypt(request.COOKIES.get("userInfo"))
         user = User.objects.get(username=cookie)
@@ -165,6 +175,8 @@ def viewcarts(request):
 
 
 def deletecart(request):
+    if checker(request):
+        return redirect("USER:PROFILE")
     try:
         checker(request)
         data = request.GET.get("data").split(",")
@@ -184,6 +196,8 @@ def deletecart(request):
 
 
 def orderfromcart(request):
+    if checker(request):
+        return redirect("USER:PROFILE")
     try:
         checker(request)
         data = request.GET.get("data").split(",")
@@ -211,6 +225,8 @@ def orderfromcart(request):
 
 
 def vieworders(request):
+    if checker(request):
+        return redirect("USER:PROFILE")
     try:
         checker(request)
         cookie = decrypt(request.COOKIES.get("userInfo"))
@@ -238,6 +254,7 @@ def vieworders(request):
         ctx["products"] = carts
         ctx["total"] = len(orders)
         ctx["totalorders"] = len(orders)
+        ctx["user"] = user
         return render(request, "orders.html", ctx)
     except Exception as e:
         print(e)
