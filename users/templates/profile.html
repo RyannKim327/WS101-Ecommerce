@@ -26,6 +26,17 @@
 
             .buttons {
               display: flex;
+              flex-direction: row;
+              gap: 0.5rem;
+
+              >* {
+                width: 100%;
+                box-sizing: border-box;
+                background-color: white;
+                color: black;
+                border-radius: 0.5rem;
+                font-size: 1rem;
+              }
             }
           }
         }
@@ -58,13 +69,16 @@
         </span>
         <div class="buttons">
           <input class="input" type="submit" value="Submit" />
-          <button onclick="location.href"='{% url "PRODUCTS:INDEX" %}'>
-            Cancel
-          </button>
+          <button onclick="backtomain()">Cancel</button>
         </div>
       </div>
     </form>
   </div>
 </body>
+<script>
+  function backtomain() {
+    location.href = "{% url 'PRODUCTS:INDEX' %}";
+  }
+</script>
 
 </html>

@@ -34,6 +34,7 @@ def profile(request):
             user.lastname = data.get("lastname")
             user.location = data.get("location")
             user.save()
+            return redirect("PRODUCTS:INDEX")
         return render(request, "profile.html", {"user": user})
     except Exception as e:
         return redirect("PRODUCTS:INDEX")
