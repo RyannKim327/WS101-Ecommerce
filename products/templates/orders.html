@@ -27,8 +27,8 @@
               </div>
             </div>
             {% for product in products %}
-              <div id="order_base_{{ product.cartID }}" class="product" onclick="check_('{{product.cartID}}')">
-                <input id="order_{{ product.cartID }}" type="checkbox" style="display: none">
+              <div id="order_base_{{ product.orderID }}" class="product" onclick="check_('{{product.orderID}}')">
+                <input id="order_{{ product.orderID }}" type="checkbox" style="display: none">
                 <div class="product-header">
                   <span>
                     <img src="" alt="shopImage">

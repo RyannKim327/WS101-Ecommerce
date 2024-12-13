@@ -178,7 +178,6 @@ def deletecart(request):
     if checker(request):
         return redirect("USER:PROFILE")
     try:
-        checker(request)
         data = request.GET.get("data").split(",")
         cookie = decrypt(request.COOKIES.get("userInfo"))
         user = User.objects.get(username=cookie)
@@ -189,17 +188,17 @@ def deletecart(request):
 
             if user.userID == prod.userInfo:
                 prod.delete()
-        return HttpResponse("working")
+        return redirect("PRODUCTS:ORDERCART")
     except:
         pass
-    return HttpResponse("Error")
+    # return HttpResponse("Error")
+    return redirect("PRODUCTS:INDEX")
 
 
 def orderfromcart(request):
     if checker(request):
         return redirect("USER:PROFILE")
     try:
-        checker(request)
         data = request.GET.get("data").split(",")
         cookie = decrypt(request.COOKIES.get("userInfo"))
         user = User.objects.get(username=cookie)
@@ -217,11 +216,11 @@ def orderfromcart(request):
                     location="",
                 ).save()
                 prod.delete()
-        return HttpResponse("working")
+        return redirect("PRODUCTS:VIEWORDERS")
     except Exception as e:
         print(e)
         pass
-    return HttpResponse("test")
+    return redirect("PRODUCTS:INDEX")
 
 
 def vieworders(request):
